@@ -1,0 +1,13 @@
+{
+  "name": "HackersWars",
+  "description": "Ogame like",
+  "author": "Romain GRELET, Nicolas Beauvais",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "bower": "*",
+    "express": "^5.0.0-alpha.1",
+    "mongous": "*",
+    "underscore": "*"
+  },
+  "engine": "node >= 0.4.1"
+}
