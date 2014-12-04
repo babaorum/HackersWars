@@ -38,10 +38,18 @@ MongoConnector.Save = function(table_name, ressource, done) {
 		$(db+'.'+table_name).save(ressource);
 		done(null, ressource);
 	}else{
-		if(!(ressource._id instanceof oid)) {
-			ressource = MongoConnector.CreateObjectId(ressource);
-		}
-		MongoConnector.Update(table_name, ressource, {_id: ressource._id}, done);
+		MongoConnector.Select(table_name, "*", { _id: ressource._id }, {}, function(err, response){
+			if(!(ressource._id instanceof oid)) {
+				ressource = MongoConnector.CreateObjectId(ressource);
+			}
+			if(response == null) {
+				$(db+'.'+table_name).save(ressource);
+				done(null, ressource);
+			} else {
+				MongoConnector.Update(table_name, ressource, {_id: ressource._id}, done);
+			}
+			done(null, ressource);
+		});
 	}
 };
 

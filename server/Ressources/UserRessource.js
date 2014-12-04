@@ -4,8 +4,11 @@ var userTable = new Table('users');
 
 function UserRessource(blob){
 	this._id = blob._id;
+	this.id_google = blob.id_google;
 	this.name = blob.name;
-	this.age = blob.age;
+	this.firstname = blob.firstname;
+	this.email = blob.email;
+	this.picture = blob.picture;
 };
 
 UserRessource.Fetch = function(id, done) {
@@ -20,6 +23,27 @@ UserRessource.Fetch = function(id, done) {
 		
 		done(err, result);
 	});	
+};
+
+UserRessource.FetchOrCreateByGoogleId = function(blob, done) {
+	userTable.Select('*', { id_google: blob.id_google }, {}, function(err, response){
+		if(response.length > 0) {
+			user = new UserRessource(response[0]);
+			done(null, user);
+		} else {
+			user = new UserRessource(blob);
+			user.Save(done);
+		}
+	});
+	/*UserRessource.Fetch(id, function(err, result){
+		if(result instanceof UserRessource)
+		{
+			done(null, result);
+		} else {
+			user = new UserRessource({ _id: id });
+			user.Save(done);
+		}
+	});*/
 };
 
 UserRessource.List = function(done) {
@@ -64,8 +88,11 @@ UserRessource.prototype.Save = function(done) {
 UserRessource.prototype.Serialize = function() {
 	return {
 		_id: this._id,
+		id_google: this.id_google,
 		name: this.name,
-		age: this.age
+		firstname: this.firstname,
+		email: this.email,
+		picture: this.picture
 	};
 };
 
