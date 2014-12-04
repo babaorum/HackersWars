@@ -1,3 +1,4 @@
-node_modules
-bower_components
+.idea/
+node_modules/
+public/packages/
 .DS_Store
