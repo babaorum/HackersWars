@@ -1,0 +1,23 @@
+nav#menu {
+  color: $main;
+  padding: 0 20px;
+
+  h1 {
+    padding: 20px 0;
+    font-size: 20px;
+    display: inline-block;
+  }
+
+  ul {
+    float: right;
+    li {
+      cursor: pointer;
+      text-transform: uppercase;
+      display: inline-block;
+      float: left;
+      line-height: 60px;
+      text-align: center;
+      margin-left: 20px;
+    }
+  }
+}

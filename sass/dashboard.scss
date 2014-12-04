@@ -1,0 +1,132 @@
+#dashboard body {
+
+  header#main {
+
+    position: relative;
+
+    h2 {
+      margin-top: 50px;
+      font-size: 80px;
+      text-align: center;
+    }
+
+    #stats {
+
+      margin-top: 40px;
+      text-align: center;
+
+      #bitcoins {
+        font-size: 45px;
+        padding: 20px 0;
+        margin-bottom: 30px;
+
+        #bitcoin-icon-top {
+          width: 34px;
+          margin-left: 20px;
+        }
+      }
+
+      .stat-value {
+        .item {
+          display: block;
+          margin-bottom: 10px;
+          font-size: 20px;
+        }
+
+        .value {
+          font-size: 40px;
+        }
+
+      }
+
+    }
+
+  }
+
+  #online-menu {
+    margin-top: 70px;
+    text-align: center;
+  }
+
+  #board {
+
+    margin: 70px auto 0;
+    opacity: 1;
+
+    h3 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .board-elem {
+
+      position: relative;
+      margin-bottom: 40px;
+
+      .image_clq {
+        background-color: $main;
+      }
+
+      .button {
+        float: left;
+        margin-top: 20px;
+      }
+
+      .button:last-child {
+        top: 140px;
+      }
+
+      .button.buy {
+        display: none;
+      }
+
+      .explanations {
+        display: none;
+        margin-top: 80px;
+      }
+
+      .blocked {
+
+        opacity: 0.3;
+        @include transition-property(opacity);
+        @include transition-duration(1s);
+
+        .button {
+          &.buy {
+            display: block;
+          }
+
+          &.upgrade {
+            display: none;
+          }
+
+        }
+
+        .units {
+          display: none;
+        }
+
+        .explanations {
+          display: block;
+        }
+      }
+
+      &:hover .blocked {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  #dashboard body {
+
+    header#main {
+
+      h2 {
+        font-size: 45px;
+      }
+    }
+  }
+}

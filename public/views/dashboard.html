@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html id="dashboard">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HackersWars</title>
+
+    <link rel="stylesheet" href="../../../tata/public/assets/styles/unsemantic-grid-responsive.css"/>
+    <link rel="stylesheet" href="../../../tata/public/assets/styles/main.css"/>
+</head>
+<body>
+
+<nav id="menu">
+    <h1>HackersWars;</h1>
+    <ul>
+        <li>Logout</li>
+    </ul>
+</nav>
+
+<div class="grid-container">
+    <header id="main" class="grid-100">
+        <h2>HackerTeam;</h2>
+
+        <div id="stats">
+
+            <div id="bitcoins" class="grid-100">
+                <img src="../../../tata/public/assets/images/bitcoin-icon.png" id="bitcoin-icon-top" alt=""/>
+                <span id="bitcoins-value">000 000 000 000</span>
+            </div>
+
+            <div id="life-value" class="stat-value grid-33">
+                <i></i>
+                <span class="item">Power</span>
+                <span class="value">0000</span>
+            </div>
+
+            <div id="attack-value" class="stat-value grid-33">
+                <i></i>
+                <span class="item">Attack</span>
+                <span class="value">0000</span>
+            </div>
+
+            <div id="defense-value" class="stat-value grid-33">
+                <i></i>
+                <span class="item">Security</span>
+                <span class="value">0000</span>
+            </div>
+
+        </div>
+
+    </header>
+</div>
+
+<div id="online-menu" class="grid-container">
+    <button class="button">Play online</button>
+    <button class="button">Scoreboard</button>
+</div>
+
+<section id="board" class="grid-container">
+
+    <div id="data_centers" class="board-elem grid-33 grid-parent" ng-controller="DatabaseController as board">
+        <div ng-class="{blocked: board.blocked}" ng-include="'templates/board-elem.html'"></div>
+    </div>
+
+    <div id="personal_computers" class="board-elem grid-33 grid-parent" ng-controller="ComputerController as board">
+        <div ng-class="{blocked: board.blocked}" ng-include="'templates/board-elem.html'"></div>
+    </div>
+
+    <div id="caves" class="board-elem grid-33 grid-parent blocked" ng-controller="CaveController as board">
+        <div ng-class="{blocked: board.blocked}" ng-include="'templates/board-elem.html'"></div>
+    </div>
+
+</section>
+
+<script data-main="main.js" src="../../../tata/public/packages/requirejs/require.js" defer></script>
+</body>
+</html>

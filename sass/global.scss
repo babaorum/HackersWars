@@ -1,0 +1,22 @@
+* { box-sizing: border-box; }
+*:focus { outline: 0; }
+
+body {
+  font-family: $f-consolas;
+  background-color: $c-black;
+  color: $main;
+}
+
+hr {
+  border: none;
+  margin: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.no-padding {
+  padding-right: 0px;
+  padding-left: 0px;
+}

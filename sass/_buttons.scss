@@ -1,0 +1,27 @@
+.button {
+  border: 1px solid $main;
+  background-color: transparent;
+  border-radius: 3px;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: $main;
+  font-family: bold;
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  @include transition-property(background-color, color);
+  @include transition-duration(.3s);
+
+  .bitcoin {
+    width: 17px;
+    line-height: 17px;
+    vertical-align: middle;
+    margin-top: -4px;
+    margin-left: 10px;
+  }
+}
+
+.button:hover {
+  background-color: $main;
+  color: $c-black;
+}

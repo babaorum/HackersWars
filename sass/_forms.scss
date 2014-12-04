@@ -1,0 +1,29 @@
+::-webkit-input-placeholder {
+  color: $main;
+  opacity: 0.3;
+}
+:-moz-placeholder {
+  color: $main;
+  opacity: 0.3;
+}
+::-moz-placeholder {
+  color: $main;
+  opacity: 0.3;
+}
+:-ms-input-placeholder {
+  color: $main;
+  opacity: 0.3;
+}
+
+.input {
+  border: 1px solid $main;
+  background-color: transparent;
+  border-radius: 3px;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: $main;
+  font-family: bold;
+  font-size: 17px;
+  @include transition-property(background-color, color);
+  @include transition-duration(.3s);
+}
