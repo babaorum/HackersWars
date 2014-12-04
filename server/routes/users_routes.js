@@ -3,7 +3,15 @@ var _ = require('underscore');
 
 module.exports.mount = function(app) {
 
-	app.get('/api/1/users', function(req,res){
+	app.get('/api/users/infos', function(req, res) {
+		if(req.user) {
+			return res.status(200).send(req.user);
+		} else {
+			return res.status(400).end();
+		}
+	});
+
+	app.get('/api/users', function(req,res){
 
 		UserRessource.List(function(err, response){
 			//serialize users
@@ -15,7 +23,7 @@ module.exports.mount = function(app) {
 		});
 	});
 
-	app.get('/api/1/users/:id', function(req,res){
+	app.get('/api/users/:id', function(req,res){
 		var id = req.params.id;
 		
 		UserRessource.Fetch(id, function(err, response){
@@ -26,7 +34,7 @@ module.exports.mount = function(app) {
 		});
 	});
 
-	app.post('/api/1/users', function(req,res){
+	app.post('/api/users', function(req,res){
 		var user = req.body.users;
 
 		UserRessource.Deserialize(user, function(err, userR) {
@@ -39,7 +47,7 @@ module.exports.mount = function(app) {
 
 	});
 	
-	app.put('/api/1/users/:id', function(req,res){
+	app.put('/api/users/:id', function(req,res){
 		var id = req.params.id;
 		var user = req.body.users;
 
@@ -52,7 +60,7 @@ module.exports.mount = function(app) {
 		});
 	});
 	
-	app.delete('/api/1/users/:id', function(req,res){
+	app.delete('/api/users/:id', function(req,res){
 		var id = req.params.id;
 
 		UserRessource.Delete(id, function(err, response) {

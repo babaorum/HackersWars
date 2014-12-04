@@ -62,7 +62,16 @@ passport.use(new GoogleStrategy({
 routes.mount(app);
 
 app.get('/', function(req,res){
-	res.status(200).render('user.html');
+	if(!req.user) {
+    return res.status(200).render('index.html');
+  } else {
+    if(!req.user.team) {
+      return res.status(200).render('create.html');
+    }
+    else {
+      return res.status(200).render('dashboard.html');
+    }
+  }
 });
 
 app.get('/auth/google', passport.authenticate('google', { scope: [
