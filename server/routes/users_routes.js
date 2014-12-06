@@ -4,11 +4,11 @@ var _ = require('underscore');
 module.exports.mount = function(app) {
 
 	app.get('/api/users/infos', function(req, res) {
-		if(req.user) {
-			return res.status(200).send(req.user);
-		} else {
-			return res.status(400).end();
+		if(!req.user) {
+			return res.status(401).end();
 		}
+
+		return res.status(200).send(req.user);
 	});
 
 	app.get('/api/users', function(req,res){

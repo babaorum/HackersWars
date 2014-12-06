@@ -1,7 +1,9 @@
 var _ = require('underscore');
 
 var routes = [
-    'users'
+    'users',
+    'building',
+    'units'
 ];
 
 module.exports.mount = function(app) {
