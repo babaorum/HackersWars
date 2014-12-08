@@ -1,6 +1,6 @@
 // Config
-@import "../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-core-1.0.1/stylesheets/compass/_reset";
-@import "../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-core-1.0.1/stylesheets/compass/css3/_transition";
+@import "compass/reset";
+@import "compass/css3/transition";
 
 // Properties
 @import "properties/&colors";

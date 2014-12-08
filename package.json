@@ -5,12 +5,13 @@
   "dependencies": {
     "body-parser": "^1.9.2",
     "bower": "*",
+    "ejs": "^1.0.0",
     "express": "^5.0.0-alpha.1",
     "express-session": "*",
     "mongous": "*",
-    "underscore": "*",
     "passport": "*",
-    "passport-google-oauth": "*"
+    "passport-google-oauth": "*",
+    "underscore": "*"
   },
   "engine": "node >= 0.4.1"
 }

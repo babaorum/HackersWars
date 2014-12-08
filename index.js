@@ -86,6 +86,16 @@ app.get('/auth/google', passport.authenticate('google', { scope: [
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }), function(req, res) {
     res.redirect('/');
-}); 
+});
+
+// DEBUG FRONT ROUTE
+app.get('/sandbox/create', function(req, res) {
+    return res.status(200).render('create.html');
+});
+
+app.get('/sandbox/dashboard', function(req, res) {
+    return res.status(200).render('dashboard.html');
+});
+// DEBUG FRONT ROUTE
 
 app.listen(8080);

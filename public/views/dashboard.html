@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>HackersWars</title>
 
-    <link rel="stylesheet" href="../../../tata/public/assets/styles/unsemantic-grid-responsive.css"/>
-    <link rel="stylesheet" href="../../../tata/public/assets/styles/main.css"/>
+    <link rel="stylesheet" href="/assets/styles/unsemantic-grid-responsive.css"/>
+    <link rel="stylesheet" href="/assets/styles/main.css"/>
 </head>
 <body>
 
@@ -22,9 +22,9 @@
 
         <div id="stats">
 
-            <div id="bitcoins" class="grid-100">
-                <img src="../../../tata/public/assets/images/bitcoin-icon.png" id="bitcoin-icon-top" alt=""/>
-                <span id="bitcoins-value">000 000 000 000</span>
+            <div id="bitcoins" class="grid-100" ng-controller="BankController as bank">
+                <img src="/assets/images/bitcoin-icon.png" id="bitcoin-icon-top" alt=""/>
+                <span id="bitcoins-value">{{ bank.value | zero:12 }}</span>
             </div>
 
             <div id="life-value" class="stat-value grid-33">
@@ -58,19 +58,19 @@
 <section id="board" class="grid-container">
 
     <div id="data_centers" class="board-elem grid-33 grid-parent" ng-controller="DatabaseController as board">
-        <div ng-class="{blocked: board.blocked}" ng-include="'templates/board-elem.html'"></div>
+        <div ng-class="{blocked: board.blocked}" ng-include="'/templates/board-elem.html'"></div>
     </div>
 
     <div id="personal_computers" class="board-elem grid-33 grid-parent" ng-controller="ComputerController as board">
-        <div ng-class="{blocked: board.blocked}" ng-include="'templates/board-elem.html'"></div>
+        <div ng-class="{blocked: board.blocked}" ng-include="'/templates/board-elem.html'"></div>
     </div>
 
     <div id="caves" class="board-elem grid-33 grid-parent blocked" ng-controller="CaveController as board">
-        <div ng-class="{blocked: board.blocked}" ng-include="'templates/board-elem.html'"></div>
+        <div ng-class="{blocked: board.blocked}" ng-include="'/templates/board-elem.html'"></div>
     </div>
 
 </section>
 
-<script data-main="main.js" src="../../../tata/public/packages/requirejs/require.js" defer></script>
+<script data-main="/main.js" src="/packages/requirejs/require.js" defer></script>
 </body>
 </html>

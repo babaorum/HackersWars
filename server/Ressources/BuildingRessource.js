@@ -65,11 +65,11 @@ BuildingRessource.prototype.Save = function(done) {
 
 BuildingRessource.prototype.Serialize = function() {
 	return {
-		_id = this._id,
-		id_user = this.id_user,
-		type = this.type,
-		quantity = this.quantity,
-		level = this.level;
+		_id: this._id,
+		id_user: this.id_user,
+		type: this.type,
+		quantity: this.quantity,
+		level: this.level
 	};
 };
 
