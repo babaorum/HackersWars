@@ -10,16 +10,16 @@ requirejs.config({
         'app': '/app/app',
 
         // Controllers
-        'bank': '/app/controllers/bank',
-        'database': '/app/controllers/database',
-        'computer': '/app/controllers/computer',
-        'cave': '/app/controllers/cave',
+        'bankController': '/app/controllers/bankController',
+        'databaseController': '/app/controllers/databaseController',
+        'computerController': '/app/controllers/computerController',
+        'caveController': '/app/controllers/caveController',
 
         // Services
-        'resourceFactory': '/app/services/resource',
+        'resourceFactory': '/app/services/resourceFactory',
 
         // Filters
-        'zero': '/app/filters/zero'
+        'zeroFilter': '/app/filters/zeroFilter'
     },
     shim: {
         'angularAMD': ['angular'],
@@ -29,13 +29,13 @@ requirejs.config({
             'resourceFactory',
 
             // Controllers
-            'bank',
-            'database',
-            'computer',
-            'cave',
+            'bankController',
+            'databaseController',
+            'computerController',
+            'caveController',
 
             // Filters
-            'zero'
+            'zeroFilter'
         ]
     },
     deps: ['app']

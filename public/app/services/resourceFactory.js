@@ -6,10 +6,10 @@ define(function () {
 
         var factory = {};
 
-        factory.toto = "ok";
+        factory.test = "ok";
 
         return {
-            toto: factory.toto
+            test: factory.test
         };
     };
 

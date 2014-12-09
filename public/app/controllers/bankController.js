@@ -1,8 +1,8 @@
-define(['resourceFactory'], function (resourceFactory) {
+define(function () {
 
     'use strict';
 
-    var bank = function () {
+    var bank = function (resourceFactory) {
 
         //var resource = new resource();
         console.log(resourceFactory);

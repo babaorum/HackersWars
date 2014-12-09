@@ -5,6 +5,10 @@ body {
   font-family: $f-consolas;
   background-color: $c-black;
   color: $main;
+
+  &:not(.loaded) > * {
+    visibility: hidden;
+  }
 }
 
 hr {
