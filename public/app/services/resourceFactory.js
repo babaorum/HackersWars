@@ -2,16 +2,65 @@ define(function () {
 
     'use strict';
 
-    var resource = function () {
+    var factory = function ($rootScope) {
 
-        var factory = {};
+        var res = {};
 
-        factory.test = "ok";
+        // Data
+        res.bitcoin = 0;
+
+        res.power = 0;
+        res.attack = 0;
+        res.security = 0;
+
+        // Getter
+        res.get = function (data) {
+            return res[data];
+        };
+
+        // Setter
+        res.set = function (data, value) {
+            res[data] = value;
+        };
+
+        // Methods
+        res.buyIfPossible = function (price) {
+
+            if (price > res.bitcoin) { return false; }
+
+            res.bitcoin = res.bitcoin - price;
+
+            return true;
+        };
+
 
         return {
-            test: factory.test
+            //Data
+
+            // Bitcoin
+            getBitcoin: function () { return res.get('bitcoin'); },
+            setBitcoin: function (value) { return res.set('bitcoin', value); },
+            addBitcoin: function (value) { return res.set('bitcoin', res.bitcoin + value); },
+
+            // Power
+            getPower: function () { return res.get('power'); },
+            setPower: function (value) { return res.set('power', value); },
+            addPower: function (value) { return res.set('power', res.power + value); },
+
+            // Attack
+            getAttack: function () { return res.get('attack'); },
+            setAttack: function (value) { return res.set('attack', value); },
+            addAttack: function (value) { return res.set('attack', res.attack + value); },
+
+            // Security
+            getSecurity: function () { return res.get('security'); },
+            setSecurity: function (value) { return res.set('security', value); },
+            addSecurity: function (value) { return res.set('security', res.security + value); },
+
+            // Methods
+            buyIfPossible: res.buyIfPossible
         };
     };
 
-    return resource;
+    return factory;
 });

@@ -10,7 +10,7 @@ requirejs.config({
         'app': '/app/app',
 
         // Controllers
-        'bankController': '/app/controllers/bankController',
+        'resourceController': '/app/controllers/resourceController',
         'databaseController': '/app/controllers/databaseController',
         'computerController': '/app/controllers/computerController',
         'caveController': '/app/controllers/caveController',
@@ -29,7 +29,7 @@ requirejs.config({
             'resourceFactory',
 
             // Controllers
-            'bankController',
+            'resourceController',
             'databaseController',
             'computerController',
             'caveController',

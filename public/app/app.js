@@ -12,7 +12,7 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      */
 
     // Resource
-    app.factory('resourceFactory', require('resourceFactory'));
+    app.factory('ResourceFactory', ['$rootScope', require('resourceFactory')]);
 
 
     /**
@@ -22,16 +22,16 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      */
 
     // Bank+
-    app.controller('BankController', ['resourceFactory', require('bankController')]);
+    app.controller('ResourceController', ['$scope', 'ResourceFactory', require('resourceController')]);
 
     // Databases
-    app.controller('DatabaseController', require('databaseController'));
+    app.controller('DatabaseController', ['$scope', 'ResourceFactory', require('databaseController')]);
 
     // Computers
-    app.controller('ComputerController', require('computerController'));
+    app.controller('ComputerController', ['$scope', 'ResourceFactory', require('computerController')]);
 
     // Caves
-    app.controller('CaveController', require('caveController'));
+    app.controller('CaveController', ['$scope', 'ResourceFactory', require('caveController')]);
 
 
     /**

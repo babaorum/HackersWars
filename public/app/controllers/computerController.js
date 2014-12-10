@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var computer = function () {
+    var computer = function ($scope, resourceFactory) {
 
         this.name = "Personal computers";
         this.img = "computer_clq";
@@ -11,6 +11,12 @@ define(function () {
         this.price = 50;
         this.level = 1;
         this.blocked = true;
+
+        this.buy = function () {
+            if (resourceFactory.buyIfPossible(this.price)) {
+                this.blocked = false;
+            }
+        };
     };
 
     return computer;

@@ -20,29 +20,29 @@
     <header id="main" class="grid-100">
         <h2>HackerTeam;</h2>
 
-        <div id="stats">
+        <div id="stats"  ng-controller="ResourceController as res">
 
-            <div id="bitcoins" class="grid-100" ng-controller="BankController as bank">
+            <div id="bitcoins" class="grid-100">
                 <img src="/assets/images/bitcoin-icon.png" id="bitcoin-icon-top" alt=""/>
-                <span id="bitcoins-value">{{ bank.value | zero:12 }}</span>
+                <span id="bitcoins-value">{{ bitcoin | zero:12 }}</span>
             </div>
 
             <div id="life-value" class="stat-value grid-33">
                 <i></i>
                 <span class="item">Power</span>
-                <span class="value">0000</span>
+                <span class="value">{{ power | zero:3 }}</span>
             </div>
 
             <div id="attack-value" class="stat-value grid-33">
                 <i></i>
                 <span class="item">Attack</span>
-                <span class="value">0000</span>
+                <span class="value">{{ attack | zero:3 }}</span>
             </div>
 
             <div id="defense-value" class="stat-value grid-33">
                 <i></i>
                 <span class="item">Security</span>
-                <span class="value">0000</span>
+                <span class="value">{{ security | zero:3 }}</span>
             </div>
 
         </div>
