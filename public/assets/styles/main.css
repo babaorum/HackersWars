@@ -148,6 +148,34 @@ nav#menu ul li {
   transition-duration: 0.3s;
 }
 
+.popup-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0c0c0c;
+  max-width: 310px;
+}
+.popup-container .popup {
+  margin: 5px auto 0;
+  border: 1px solid #3aff2d;
+  display: inline-block;
+}
+.popup-container .popup p.title {
+  background-color: #3aff2d;
+  color: #0c0c0c;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.popup-container .popup p.title i {
+  float: right;
+}
+.popup-container .popup p.message {
+  max-width: 300px;
+  padding: 20px 10px;
+}
+
 * {
   box-sizing: border-box;
 }

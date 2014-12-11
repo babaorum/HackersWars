@@ -1,0 +1,32 @@
+.popup-container {
+
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: $c-black;
+  max-width: 310px;
+  
+  .popup {
+    margin: 5px auto 0;
+    border: 1px solid $main;
+    display: inline-block;
+
+    p.title {
+      background-color: $main;
+      color: $c-black;
+      padding: 5px 10px;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+
+      i {
+        float: right;
+      }
+    }
+
+    p.message {
+      max-width: 300px;
+      padding: 20px 10px;
+    }
+  }
+}

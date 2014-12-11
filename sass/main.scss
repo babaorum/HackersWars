@@ -3,17 +3,18 @@
 @import "compass/css3/transition";
 
 // Properties
-@import "properties/&colors";
-@import "properties/&fonts";
+@import "properties/colors";
+@import "properties/fonts";
 
 // Components
-@import "menu";
-@import "buttons";
-@import "forms";
+@import "components/menu";
+@import "components/buttons";
+@import "components/forms";
+@import "components/popup";
 
 // Styles
 @import "global";
 
 // Pages
-@import "home";
-@import "dashboard";
+@import "pages/home";
+@import "pages/dashboard";
