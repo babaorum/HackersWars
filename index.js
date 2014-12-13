@@ -4,7 +4,7 @@ var path = require('path');
 
 var expressSession = require('express-session');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth-offline').OAuth2Strategy;
 var UserRessource = require('./server/Ressources/UserRessource');
 
 var root = path.resolve(__dirname, '.');

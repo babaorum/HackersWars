@@ -10,7 +10,7 @@
     "express-session": "*",
     "mongous": "*",
     "passport": "*",
-    "passport-google-oauth": "*",
+    "passport-google-oauth-offline": "^0.2.1",
     "underscore": "*"
   },
   "engine": "node >= 0.4.1"
