@@ -3,12 +3,13 @@ var _ = require('underscore');
 var userTable = new Table('users');
 
 function UserRessource(blob){
-	this._id = blob._id;
+	this._id = blob._id == undefined ? blob._id : String(blob._id);
 	this.id_google = blob.id_google;
 	this.name = blob.name;
 	this.firstname = blob.firstname;
 	this.email = blob.email;
 	this.picture = blob.picture;
+	this.team = blob.team;
 };
 
 UserRessource.Fetch = function(id, done) {
@@ -24,6 +25,20 @@ UserRessource.Fetch = function(id, done) {
 		done(err, result);
 	});	
 };
+
+UserRessource.FetchByGoogleId = function(id_google, done) {
+	userTable.Select('*', {id_google: id_google}, {}, function(err, response){
+		var result = null;
+
+		if(response.length > 0) {
+			_(response).each(function(user) {
+				result = new UserRessource(user);
+			});
+		}
+
+		done(err, result);
+	});
+}
 
 UserRessource.FetchOrCreateByGoogleId = function(blob, done) {
 	userTable.Select('*', { id_google: blob.id_google }, {}, function(err, response){
@@ -81,7 +96,7 @@ UserRessource.Deserialize = function(blob, done) {
 
 UserRessource.prototype.Save = function(done) {
 	userTable.Save(this, function(err, response){
-		done(err, response);
+		return done(err, response);
 	});
 };
 
@@ -92,7 +107,8 @@ UserRessource.prototype.Serialize = function() {
 		name: this.name,
 		firstname: this.firstname,
 		email: this.email,
-		picture: this.picture
+		picture: this.picture,
+		team: this.team
 	};
 };
 

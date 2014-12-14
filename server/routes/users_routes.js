@@ -2,7 +2,24 @@ var UserRessource = require('./../Ressources/UserRessource');
 var _ = require('underscore');
 
 module.exports.mount = function(app) {
+    
+    app.post('/users/team', function(req, res) {
+        if (!req.user) {
+            return res.redirect('/');
+        }
+        var user = req.user;
+        user.team = req.body.team;
 
+        UserRessource.Deserialize(user, function(err, userR) {
+            console.log(userR);
+            userR.Save(function(err, user) {
+            });
+        });
+
+        return res.redirect('/');
+    });
+
+//API
     app.get('/api/users/infos', function(req, res) {
         if (!req.user) {
             return res.status(401).end();
