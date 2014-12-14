@@ -10,20 +10,13 @@
 </head>
 <body>
 
-<!-- @TODO: make this pop from a angular generic function + listen for close icon click -->
-<div class="popup-container">
-    <div class="popup">
-        <p class="title">Alert <i class="fa fa-times"></i></p>
-        <p class="message">You don't have enough bitcoin to do that</p>
+<div class="toast-container"  ng-controller="ToastController">
+
+    <div class="toast" ng-repeat="(key,toast) in toasts">
+        <p class="title">Alert <i class="fa fa-times" ng-click="close(key)"></i></p>
+        <p class="message">{{ toast.content }}</p>
     </div>
-    <div class="popup">
-        <p class="title">Alert <i class="fa fa-times"></i></p>
-        <p class="message">You don't have enough bitcoin to do that</p>
-    </div>
-    <div class="popup">
-        <p class="title">Alert <i class="fa fa-times"></i></p>
-        <p class="message">You don't have enough bitcoin to do that</p>
-    </div>
+
 </div>
 
 <nav id="menu">
@@ -37,7 +30,7 @@
     <header id="main" class="grid-100">
         <h2>HackerTeam;</h2>
 
-        <div id="stats"  ng-controller="ResourceController as res">
+        <div id="stats"  ng-controller="ResourceController as resource">
 
             <div id="bitcoins" class="grid-100">
                 <img src="/assets/images/bitcoin-icon.png" id="bitcoin-icon-top" alt=""/>

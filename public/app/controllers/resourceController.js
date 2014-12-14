@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var bank = function ($scope, resourceFactory) {
+    var bank = function ($scope, resourceFactory, toastFactory) {
 
         // Property
         $scope.bitcoin = resourceFactory.getBitcoin();
@@ -12,9 +12,10 @@ define(function () {
 
         // Watch
         $scope.$watch(resourceFactory.getBitcoin, function () { $scope.bitcoin = resourceFactory.getBitcoin(); });
-        $scope.$watch(resourceFactory.getPower, function () { $scope.bitcoin = resourceFactory.getPower(); });
-        $scope.$watch(resourceFactory.getAttack, function () { $scope.bitcoin = resourceFactory.getAttack(); });
-        $scope.$watch(resourceFactory.getSecurity, function () { $scope.bitcoin = resourceFactory.getSecurity(); });
+
+        $scope.$watch(resourceFactory.getPower, function () { $scope.power = resourceFactory.getPower(); });
+        $scope.$watch(resourceFactory.getAttack, function () { $scope.attack = resourceFactory.getAttack(); });
+        $scope.$watch(resourceFactory.getSecurity, function () { $scope.security = resourceFactory.getSecurity(); });
     };
 
     return bank;

@@ -5,6 +5,7 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
     // Define app
     var app = angular.module("hackerWars", []);
 
+
     /**
      * ================
      * ======= Services
@@ -14,6 +15,9 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
     // Resource
     app.factory('ResourceFactory', ['$rootScope', require('resourceFactory')]);
 
+    // Toast
+    app.factory('ToastFactory', ['$rootScope', require('toastFactory')]);
+
 
     /**
      * ================
@@ -21,8 +25,8 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      * ================
      */
 
-    // Bank+
-    app.controller('ResourceController', ['$scope', 'ResourceFactory', require('resourceController')]);
+    // Bank
+    app.controller('ResourceController', ['$scope', 'ResourceFactory', 'ToastFactory', require('resourceController')]);
 
     // Databases
     app.controller('DatabaseController', ['$scope', 'ResourceFactory', require('databaseController')]);
@@ -32,6 +36,9 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
 
     // Caves
     app.controller('CaveController', ['$scope', 'ResourceFactory', require('caveController')]);
+
+    // Toasts
+    app.controller('ToastController', ['$scope', 'ToastFactory', require('toastController')]);
 
 
     /**
@@ -43,6 +50,13 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
     // Zero
     app.filter('zero', require('zeroFilter'));
 
+    // Reverse
+    app.filter('reverse', require('reverseFilter'));
+
+
+    /**
+     * Initialisation
+     */
 
     // Display App
     angular.element(document).ready(function () {

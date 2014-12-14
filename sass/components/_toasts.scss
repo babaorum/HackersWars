@@ -1,15 +1,18 @@
-.popup-container {
+.toast-container {
 
   position: absolute;
   bottom: 20px;
   right: 20px;
   background-color: $c-black;
   max-width: 310px;
+  z-index: 1;
   
-  .popup {
+  .toast {
     margin: 5px auto 0;
     border: 1px solid $main;
+    background-color: $c-black;
     display: inline-block;
+    min-width: 310px;
 
     p.title {
       background-color: $main;
@@ -21,6 +24,7 @@
 
       i {
         float: right;
+        cursor: pointer;
       }
     }
 

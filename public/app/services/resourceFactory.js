@@ -7,8 +7,7 @@ define(function () {
         var res = {};
 
         // Data
-        res.bitcoin = 0;
-
+        res.bitcoin = 100;
         res.power = 0;
         res.attack = 0;
         res.security = 0;

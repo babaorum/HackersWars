@@ -14,12 +14,15 @@ requirejs.config({
         'databaseController': '/app/controllers/databaseController',
         'computerController': '/app/controllers/computerController',
         'caveController': '/app/controllers/caveController',
+        'toastController': '/app/controllers/toastController',
 
         // Services
         'resourceFactory': '/app/services/resourceFactory',
+        'toastFactory': '/app/services/toastFactory',
 
         // Filters
-        'zeroFilter': '/app/filters/zeroFilter'
+        'zeroFilter': '/app/filters/zeroFilter',
+        'reverseFilter': '/app/filters/reverseFilter'
     },
     shim: {
         'angularAMD': ['angular'],
@@ -27,15 +30,18 @@ requirejs.config({
         'app': [
             // Services
             'resourceFactory',
+            'toastFactory',
 
             // Controllers
             'resourceController',
             'databaseController',
             'computerController',
             'caveController',
+            'toastController',
 
             // Filters
-            'zeroFilter'
+            'zeroFilter',
+            'reverseFilter'
         ]
     },
     deps: ['app']
