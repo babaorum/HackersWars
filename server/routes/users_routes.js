@@ -25,7 +25,7 @@ module.exports.mount = function(app) {
             return res.status(401).end();
         }
 
-        return res.status(200).send(req.user);
+        return res.status(200).send(req.user).end();
     });
 
     app.get('/api/users', function (req, res) {
@@ -47,7 +47,7 @@ module.exports.mount = function(app) {
             if (response instanceof UserRessource) {
                 response = response.Serialize();
             }
-            res.status(200).send(response);
+            res.status(200).send(response).end();
         });
     });
 
@@ -57,7 +57,7 @@ module.exports.mount = function(app) {
         UserRessource.Deserialize(user, function (err, userR) {
             if (err === null) {
                 userR.Save(function (err, response) {
-                    res.status(201).send(response);
+                    res.status(201).send(response).end();
                 });
             }
         });
@@ -72,7 +72,7 @@ module.exports.mount = function(app) {
             userR = _.extend(userR, user);
 
             userR.Save(function (err, response) {
-                res.status(200).send(response);
+                res.status(200).send(response).end();
             });
         });
     });
@@ -82,7 +82,7 @@ module.exports.mount = function(app) {
 
         UserRessource.Delete(id, function (err, response) {
             if (response === true) {
-                res.status(204).end();
+                res.status(204).end().end();
             }
         });
     });
