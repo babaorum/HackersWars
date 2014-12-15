@@ -19,7 +19,7 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
     app.factory('UserFactory', ['$http', require('userFactory')]);
 
     // Toast
-    app.factory('ToastFactory', require('toastFactory'));
+    app.factory('ToastFactory', ['$timeout', require('toastFactory')]);
 
 
     /**
