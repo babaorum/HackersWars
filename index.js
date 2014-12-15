@@ -42,25 +42,22 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:8080/auth/google/callback"
   },
   function(token, tokenSecret, profile, done) {
-    process.nextTick(function() {
-      console.log(profile);
-      data = profile._json;
-      blob = {
-        id_google: data.id,
-        email: data.email,
-        name: data.family_name,
-        firstname: data.given_name,
-        picture: data.picture
-      };
-      UserRessource.FetchByGoogleId(data.id, function (err, user) {
-        if (user != null) {
-          return done(err, user);
-        } else {
-          UserRessource.Deserialize(blob, function(err, userR) {
-            return userR.Save(done);
-          });
-        }
-      });
+    data = profile._json;
+    blob = {
+      id_google: data.id,
+      email: data.email,
+      name: data.family_name,
+      firstname: data.given_name,
+      picture: data.picture
+    };
+    UserRessource.FetchByGoogleId(data.id, function (err, user) {
+      if (user != null) {
+        return done(err, user);
+      } else {
+        UserRessource.Deserialize(blob, function(err, userR) {
+          return userR.Save(done);
+        });
+      }
     });
   }
 ));
