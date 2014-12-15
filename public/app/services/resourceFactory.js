@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var factory = function ($rootScope) {
+    var factory = function () {
 
         var res = {};
 

@@ -13,10 +13,13 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      */
 
     // Resource
-    app.factory('ResourceFactory', ['$rootScope', require('resourceFactory')]);
+    app.factory('ResourceFactory', require('resourceFactory'));
+
+    // User
+    app.factory('UserFactory', ['$http', require('userFactory')]);
 
     // Toast
-    app.factory('ToastFactory', ['$rootScope', require('toastFactory')]);
+    app.factory('ToastFactory', require('toastFactory'));
 
 
     /**
@@ -36,6 +39,9 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
 
     // Caves
     app.controller('CaveController', ['$scope', 'ResourceFactory', require('caveController')]);
+
+    // User
+    app.controller('UserController', ['$scope', 'UserFactory', require('userController')]);
 
     // Toasts
     app.controller('ToastController', ['$scope', 'ToastFactory', require('toastController')]);
