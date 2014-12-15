@@ -17,6 +17,18 @@ define(function () {
                 $scope.blocked = false;
             }
         };
+
+        // Database bitcoin Loop
+        $scope.$watch('blocked', function () {
+
+            if ($scope.blocked || loop) { return; }
+
+            loop = true;
+
+            $interval(function () {
+                resourceFactory.addBitcoin($scope.level);
+            }, 60 * 1000 - 59000);
+        });
     };
 
     return database;

@@ -32,7 +32,7 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
     app.controller('ResourceController', ['$scope', 'ResourceFactory', require('resourceController')]);
 
     // Databases
-    app.controller('DatabaseController', ['$scope', 'ResourceFactory', require('databaseController')]);
+    app.controller('DatabaseController', ['$scope', '$interval', 'ResourceFactory', require('databaseController')]);
 
     // Computers
     app.controller('ComputerController', ['$scope', 'ResourceFactory', require('computerController')]);
