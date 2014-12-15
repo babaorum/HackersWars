@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var bank = function ($scope, resourceFactory, toastFactory) {
+    var bank = function ($scope, resourceFactory) {
 
         // Property
         $scope.bitcoin = resourceFactory.getBitcoin();

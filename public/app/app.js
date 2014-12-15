@@ -29,7 +29,7 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      */
 
     // Bank
-    app.controller('ResourceController', ['$scope', 'ResourceFactory', 'ToastFactory', require('resourceController')]);
+    app.controller('ResourceController', ['$scope', 'ResourceFactory', require('resourceController')]);
 
     // Databases
     app.controller('DatabaseController', ['$scope', 'ResourceFactory', require('databaseController')]);
