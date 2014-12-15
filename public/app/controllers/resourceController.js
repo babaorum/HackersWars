@@ -12,7 +12,6 @@ define(function () {
 
         // Watch
         $scope.$watch(resourceFactory.getBitcoin, function () { $scope.bitcoin = resourceFactory.getBitcoin(); });
-
         $scope.$watch(resourceFactory.getPower, function () { $scope.power = resourceFactory.getPower(); });
         $scope.$watch(resourceFactory.getAttack, function () { $scope.attack = resourceFactory.getAttack(); });
         $scope.$watch(resourceFactory.getSecurity, function () { $scope.security = resourceFactory.getSecurity(); });

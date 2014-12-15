@@ -4,17 +4,17 @@ define(function () {
 
     var computer = function ($scope, resourceFactory) {
 
-        this.name = "Personal computers";
-        this.img = "computer_clq";
-        this.description = "Unblock the zombie computer unit and increase your attack power.";
+        $scope.name = "Personal computers";
+        $scope.img = "computer_clq";
+        $scope.description = "Unblock the zombie computer unit and increase your attack power.";
 
-        this.price = 50;
-        this.level = 1;
-        this.blocked = true;
+        $scope.price = 50;
+        $scope.level = 1;
+        $scope.blocked = true;
 
-        this.buy = function () {
-            if (resourceFactory.buyIfPossible(this.price)) {
-                this.blocked = false;
+        $scope.buy = function () {
+            if (resourceFactory.buyIfPossible($scope.price)) {
+                $scope.blocked = false;
             }
         };
     };

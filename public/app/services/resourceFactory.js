@@ -32,7 +32,6 @@ define(function () {
             return true;
         };
 
-
         return {
             //Data
 

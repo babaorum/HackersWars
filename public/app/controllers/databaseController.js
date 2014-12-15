@@ -4,17 +4,17 @@ define(function () {
 
     var database = function ($scope, resourceFactory) {
 
-        this.name = "Data centers";
-        this.img = "server_clq";
-        this.description = "Give you one Bitcoin by hour and unblock the system administrator unit";
+        $scope.name = "Data centers";
+        $scope.img = "server_clq";
+        $scope.description = "Give you one Bitcoin by hour and unblock the system administrator unit";
 
-        this.price = 10;
-        this.level = 1;
-        this.blocked = true;
+        $scope.price = 10;
+        $scope.level = 1;
+        $scope.blocked = true;
 
-        this.buy = function () {
-            if (resourceFactory.buyIfPossible(this.price)) {
-                this.blocked = false;
+        $scope.buy = function () {
+            if (resourceFactory.buyIfPossible($scope.price)) {
+                $scope.blocked = false;
             }
         };
     };

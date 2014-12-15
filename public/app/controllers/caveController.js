@@ -4,17 +4,17 @@ define(function () {
 
     var computer = function ($scope, resourceFactory) {
 
-        this.name = "Caves";
-        this.img = "console_clq";
-        this.description = "Increase your attack power, security score and unblock the hacker unit";
+        $scope.name = "Caves";
+        $scope.img = "console_clq";
+        $scope.description = "Increase your attack power, security score and unblock the hacker unit";
 
-        this.price = 100;
-        this.level = 1;
-        this.blocked = true;
+        $scope.price = 100;
+        $scope.level = 1;
+        $scope.blocked = true;
 
-        this.buy = function () {
-            if (resourceFactory.buyIfPossible(this.price)) {
-                this.blocked = false;
+        $scope.buy = function () {
+            if (resourceFactory.buyIfPossible($scope.price)) {
+                $scope.blocked = false;
             }
         };
     };
