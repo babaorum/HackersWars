@@ -2,11 +2,13 @@ define(function () {
 
     'use strict';
 
-    var database = function ($scope, resourceFactory) {
+    var database = function ($scope, $interval, resourceFactory) {
+
+        var loop = false;
 
         $scope.name = "Data centers";
         $scope.img = "server_clq";
-        $scope.description = "Give you one Bitcoin by hour and unblock the system administrator unit";
+        $scope.description = "Give you one Bitcoin by hour and unblock the system administrator unit to increase your security";
 
         $scope.price = 10;
         $scope.level = 1;

@@ -6,7 +6,7 @@ define(function () {
 
         $scope.name = "Personal computers";
         $scope.img = "computer_clq";
-        $scope.description = "Unblock the zombie computer unit and increase your attack power.";
+        $scope.description = "Unblock the zombie computer unit and increase your attack score.";
 
         $scope.price = 50;
         $scope.level = 1;

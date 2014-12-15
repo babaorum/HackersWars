@@ -6,7 +6,7 @@ define(function () {
 
         $scope.name = "Caves";
         $scope.img = "console_clq";
-        $scope.description = "Increase your attack power, security score and unblock the hacker unit";
+        $scope.description = "Unblock the hacker unit to increase your attack, power and security score";
 
         $scope.price = 100;
         $scope.level = 1;
