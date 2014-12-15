@@ -28,7 +28,10 @@
 
 <div class="grid-container">
     <header id="main" class="grid-100">
-        <h2>HackerTeam;</h2>
+
+        <div ng-controller="UserController as user">
+            <h2>{{ team }}</h2>
+        </div>
 
         <div id="stats"  ng-controller="ResourceController as resource">
 

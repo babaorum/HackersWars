@@ -14,10 +14,12 @@ requirejs.config({
         'databaseController': '/app/controllers/databaseController',
         'computerController': '/app/controllers/computerController',
         'caveController': '/app/controllers/caveController',
+        'userController': '/app/controllers/userController',
         'toastController': '/app/controllers/toastController',
 
         // Services
         'resourceFactory': '/app/services/resourceFactory',
+        'userFactory': '/app/services/userFactory',
         'toastFactory': '/app/services/toastFactory',
 
         // Filters
@@ -31,12 +33,14 @@ requirejs.config({
             // Services
             'resourceFactory',
             'toastFactory',
+            'userFactory',
 
             // Controllers
             'resourceController',
             'databaseController',
             'computerController',
             'caveController',
+            'userController',
             'toastController',
 
             // Filters
