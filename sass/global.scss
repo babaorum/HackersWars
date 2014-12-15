@@ -5,10 +5,6 @@ body {
   font-family: $f-consolas;
   background-color: $c-black;
   color: $main;
-
-  &:not(.loaded) > * {
-    visibility: hidden;
-  }
 }
 
 hr {
@@ -23,4 +19,9 @@ hr {
 .no-padding {
   padding-right: 0px;
   padding-left: 0px;
+}
+
+// Angular compiler (ngCloak)
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }

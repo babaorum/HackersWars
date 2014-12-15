@@ -54,14 +54,5 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
     app.filter('reverse', require('reverseFilter'));
 
 
-    /**
-     * Initialisation
-     */
-
-    // Display App
-    angular.element(document).ready(function () {
-        document.getElementsByTagName('body')[0].className = 'loaded ' + document.getElementsByTagName('body')[0].className;
-    });
-
     return angularAMD.bootstrap(app);
 });
