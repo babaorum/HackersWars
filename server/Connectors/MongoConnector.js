@@ -48,7 +48,6 @@ MongoConnector.Save = function(table_name, ressource, done) {
 			} else {
 				MongoConnector.Update(table_name, ressource, {_id: ressource._id}, done);
 			}
-			done(null, ressource);
 		});
 	}
 };

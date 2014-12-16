@@ -11,12 +11,10 @@ module.exports.mount = function(app) {
         user.team = req.body.team;
 
         UserRessource.Deserialize(user, function(err, userR) {
-            console.log(userR);
             userR.Save(function(err, user) {
+                res.redirect('/');
             });
         });
-
-        return res.redirect('/');
     });
 
 //API
