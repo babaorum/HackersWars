@@ -13,7 +13,7 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      */
 
     // Resource
-    app.factory('ResourceFactory', require('resourceFactory'));
+    app.factory('ResourceFactory', ['$http', require('resourceFactory')]);
 
     // User
     app.factory('UserFactory', ['$http', require('userFactory')]);

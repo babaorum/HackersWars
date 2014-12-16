@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var factory = function () {
+    var factory = function ($http) {
 
         var res = {};
 
@@ -11,10 +11,14 @@ define(function () {
         res.power = 0;
         res.attack = 0;
         res.security = 0;
+        res.buildings = {};
 
         // Getter
-        res.get = function (data) {
-            return res[data];
+        res.get = function (data, key) {
+
+            if (!key) { return res[data]; }
+
+            return res[data][key];
         };
 
         // Setter
@@ -31,6 +35,96 @@ define(function () {
 
             return true;
         };
+
+        //@TODO: test buy building
+        // Init
+        res.init = function () {
+
+            // Get buildings list
+            $http.get('/api/buildings').success(function (data) {
+
+                var building = {};
+
+                building.name = data.name;
+                building.img = data.img;
+                building.description = data.description;
+                building.blocked = data.blocked;
+                building.price = data.price;
+                building.level = data.level;
+                building.upgrades = data.upgrades;
+
+                // Store each building
+                res.buildings[data.name] = building;
+
+            }).error(function (data, status, headers, config) {
+
+                console.log(data, status, headers, config);
+            });
+        };
+
+        //@FIX: in the wait of the API
+        res.initFake = function () {
+
+            // Data Center
+            var building = {};
+
+            building.name = 'Data center';
+            building.img = 'server_clq';
+            building.description = 'Give you one Bitcoin by hour and unblock the system administrator unit to increase your security';
+            building.blocked = true;
+            building.price = 10;
+            building.level = 1;
+            building.upgrades = {
+                1: {price: 100, bitcoinRatio: 2, unitRatio: 2},
+                2: {price: 250, bitcoinRatio: 3, unitRatio: 3},
+                3: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
+                4: {price: 700, bitcoinRatio: 6, unitRatio: 6},
+                5: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+            };
+
+            res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
+
+            // Personal computers
+            building = {};
+
+            building.name = 'Personal computers';
+            building.img = 'computer_clq';
+            building.description = 'Unblock the zombie computer unit and increase your attack score.';
+            building.blocked = true;
+            building.price = 50;
+            building.level = 1;
+            building.upgrades = {
+                1: {price: 100, bitcoinRatio: 2, unitRatio: 2},
+                2: {price: 250, bitcoinRatio: 3, unitRatio: 3},
+                3: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
+                4: {price: 700, bitcoinRatio: 6, unitRatio: 6},
+                5: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+            };
+
+            res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
+
+            // Caves
+            building = {};
+
+            building.name = 'Caves';
+            building.img = 'console_clq';
+            building.description = 'Unblock the hacker unit to increase your attack, power and security score';
+            building.blocked = true;
+            building.price = 100;
+            building.level = 1;
+            building.upgrades = {
+                1: {price: 100, bitcoinRatio: 2, unitRatio: 2},
+                2: {price: 250, bitcoinRatio: 3, unitRatio: 3},
+                3: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
+                4: {price: 700, bitcoinRatio: 6, unitRatio: 6},
+                5: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+            };
+
+            res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
+        };
+
+        // init
+        res.initFake();
 
         return {
             //Data
@@ -54,6 +148,9 @@ define(function () {
             getSecurity: function () { return res.get('security'); },
             setSecurity: function (value) { return res.set('security', value); },
             addSecurity: function (value) { return res.set('security', res.security + value); },
+
+            // Get building
+            getBuilding: function (key) { return res.get('buildings', key); },
 
             // Methods
             buyIfPossible: res.buyIfPossible

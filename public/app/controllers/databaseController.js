@@ -4,15 +4,18 @@ define(function () {
 
     var database = function ($scope, $interval, resourceFactory) {
 
-        var loop = false;
+        var loop = false,
+            building = resourceFactory.getBuilding('datacenter');
 
-        $scope.name = "Data centers";
-        $scope.img = "server_clq";
-        $scope.description = "Give you one Bitcoin by hour and unblock the system administrator unit to increase your security";
 
-        $scope.price = 10;
-        $scope.level = 1;
-        $scope.blocked = true;
+
+        $scope.name = building.name;
+        $scope.img = building.img;
+        $scope.description = building.description;
+        $scope.price = building.price;
+        $scope.level = building.level;
+        $scope.blocked = building.blocked;
+        $scope.upgrades = building.upgrades;
 
         $scope.buy = function () {
             if (resourceFactory.buyIfPossible($scope.price)) {

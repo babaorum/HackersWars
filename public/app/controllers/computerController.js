@@ -4,13 +4,15 @@ define(function () {
 
     var computer = function ($scope, resourceFactory) {
 
-        $scope.name = "Personal computers";
-        $scope.img = "computer_clq";
-        $scope.description = "Unblock the zombie computer unit and increase your attack score.";
+        var building = resourceFactory.getBuilding('personalcomputers');
 
-        $scope.price = 50;
-        $scope.level = 1;
-        $scope.blocked = true;
+        $scope.name = building.name;
+        $scope.img = building.img;
+        $scope.description = building.description;
+        $scope.price = building.price;
+        $scope.level = building.level;
+        $scope.blocked = building.blocked;
+        $scope.upgrades = building.upgrades;
 
         $scope.buy = function () {
             if (resourceFactory.buyIfPossible($scope.price)) {
