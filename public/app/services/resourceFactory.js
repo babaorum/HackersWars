@@ -23,6 +23,7 @@ define(function () {
 
         // Setter
         res.set = function (data, value) {
+
             res[data] = value;
         };
 
@@ -71,15 +72,21 @@ define(function () {
             building.name = 'Data center';
             building.img = 'server_clq';
             building.description = 'Give you one Bitcoin by hour and unblock the system administrator unit to increase your security';
-            building.blocked = true;
-            building.price = 10;
-            building.level = 1;
+            building.level = 0;
             building.upgrades = {
-                1: {price: 100, bitcoinRatio: 2, unitRatio: 2},
-                2: {price: 250, bitcoinRatio: 3, unitRatio: 3},
-                3: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
-                4: {price: 700, bitcoinRatio: 6, unitRatio: 6},
-                5: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+                1: {price: 10, bitcoinRatio: 1, unitRatio: 1},
+                2: {price: 100, bitcoinRatio: 2, unitRatio: 2},
+                3: {price: 250, bitcoinRatio: 3, unitRatio: 3},
+                4: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
+                5: {price: 700, bitcoinRatio: 6, unitRatio: 6},
+                6: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+            };
+            building.unitName = 'Admin Sys';
+            building.units = 0;
+            building.unitStat = {
+                attack: 10,
+                security: 50,
+                power: 5
             };
 
             res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
@@ -90,15 +97,21 @@ define(function () {
             building.name = 'Personal computers';
             building.img = 'computer_clq';
             building.description = 'Unblock the zombie computer unit and increase your attack score.';
-            building.blocked = true;
-            building.price = 50;
-            building.level = 1;
+            building.level = 0;
             building.upgrades = {
-                1: {price: 100, bitcoinRatio: 2, unitRatio: 2},
-                2: {price: 250, bitcoinRatio: 3, unitRatio: 3},
-                3: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
-                4: {price: 700, bitcoinRatio: 6, unitRatio: 6},
-                5: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+                1: {price: 50, unitRatio: 1},
+                2: {price: 100, unitRatio: 2},
+                3: {price: 250, unitRatio: 3},
+                4: {price: 450, unitRatio: 4.5},
+                5: {price: 700, unitRatio: 6},
+                6: {price: 1200, unitRatio: 10}
+            };
+            building.unitName = 'Zombie computer';
+            building.units = 0;
+            building.unitStat = {
+                attack: 50,
+                security: 0,
+                power: 2
             };
 
             res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
@@ -109,15 +122,21 @@ define(function () {
             building.name = 'Caves';
             building.img = 'console_clq';
             building.description = 'Unblock the hacker unit to increase your attack, power and security score';
-            building.blocked = true;
-            building.price = 100;
-            building.level = 1;
+            building.level = 0;
             building.upgrades = {
-                1: {price: 100, bitcoinRatio: 2, unitRatio: 2},
-                2: {price: 250, bitcoinRatio: 3, unitRatio: 3},
-                3: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
-                4: {price: 700, bitcoinRatio: 6, unitRatio: 6},
-                5: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+                1: {price: 100, unitRatio: 1},
+                2: {price: 200, unitRatio: 2},
+                3: {price: 350, unitRatio: 3},
+                4: {price: 500, unitRatio: 4.5},
+                5: {price: 750, unitRatio: 6},
+                6: {price: 1200, unitRatio: 10}
+            };
+            building.unitName = 'Hacker';
+            building.units = 0;
+            building.unitStat = {
+                attack: 100,
+                security: 30,
+                power: 4
             };
 
             res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
@@ -131,8 +150,8 @@ define(function () {
 
             // Bitcoin
             getBitcoin: function () { return res.get('bitcoin'); },
-            setBitcoin: function (value) { return res.set('bitcoin', value); },
-            addBitcoin: function (value) { return res.set('bitcoin', res.bitcoin + value); },
+            setBitcoin: function (value) { return res.set('bitcoin', Math.floor(value)); },
+            addBitcoin: function (value) { return res.set('bitcoin', Math.floor(res.bitcoin + value)); },
 
             // Power
             getPower: function () { return res.get('power'); },
@@ -151,6 +170,7 @@ define(function () {
 
             // Get building
             getBuilding: function (key) { return res.get('buildings', key); },
+            addBuildingLevel: function (key) { res.buildings[key].level += 1; },
 
             // Methods
             buyIfPossible: res.buyIfPossible

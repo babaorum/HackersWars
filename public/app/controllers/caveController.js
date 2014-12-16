@@ -4,21 +4,39 @@ define(function () {
 
     var computer = function ($scope, resourceFactory) {
 
-        var building = resourceFactory.getBuilding('personalcomputers');
+        var key, building, fillBuilding;
 
-        $scope.name = building.name;
-        $scope.img = building.img;
-        $scope.description = building.description;
-        $scope.price = building.price;
-        $scope.level = building.level;
-        $scope.blocked = building.blocked;
-        $scope.upgrades = building.upgrades;
+        key = 'caves';
+        building = resourceFactory.getBuilding(key);
+
+        fillBuilding = function () {
+            $scope.name = building.name;
+            $scope.img = building.img;
+            $scope.description = building.description;
+            $scope.level = building.level;
+            $scope.upgrades = building.upgrades;
+
+            $scope.upgradeMax = _.size(angular.copy($scope.upgrades)) - 1;
+        };
 
         $scope.buy = function () {
-            if (resourceFactory.buyIfPossible($scope.price)) {
-                $scope.blocked = false;
-            }
+            $scope.upgrade();
         };
+
+        $scope.upgrade = function () {
+
+            if (!resourceFactory.buyIfPossible($scope.upgrades[$scope.level + 1].price)) { return; }
+
+            resourceFactory.addBuildingLevel(key);
+        };
+
+        // init
+        fillBuilding();
+
+        // Building modification watch
+        $scope.$watchCollection(function () { return resourceFactory.getBuilding(key); }, function () {
+            fillBuilding();
+        });
     };
 
     return computer;

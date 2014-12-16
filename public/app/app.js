@@ -1,10 +1,14 @@
-define(['angularAMD', 'angular-route'], function (angularAMD) {
+define(['angularAMD', 'angular-route', 'underscore'], function (angularAMD) {
 
     'use strict';
 
-    // Define app
-    var app = angular.module("hackerWars", []);
+    var app, _;
 
+    // Define app
+    app = angular.module("hackerWars", []);
+
+    // Define global libs
+    _ = require('underscore');
 
     /**
      * ================
@@ -32,7 +36,7 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
     app.controller('ResourceController', ['$scope', 'ResourceFactory', require('resourceController')]);
 
     // Databases
-    app.controller('DatabaseController', ['$scope', '$interval', 'ResourceFactory', require('databaseController')]);
+    app.controller('DatabaseController', ['$scope', '$interval', 'ResourceFactory', 'ToastFactory', require('databaseController')]);
 
     // Computers
     app.controller('ComputerController', ['$scope', 'ResourceFactory', require('computerController')]);

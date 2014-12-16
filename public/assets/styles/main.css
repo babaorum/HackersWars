@@ -298,6 +298,15 @@ hr {
   display: none;
   margin-top: 80px;
 }
+#dashboard body #board .board-elem .button.end {
+  display: none;
+}
+#dashboard body #board .board-elem .max .button.buy, #dashboard body #board .board-elem .max .button.upgrade {
+  display: none;
+}
+#dashboard body #board .board-elem .max .button.end {
+  display: block;
+}
 #dashboard body #board .board-elem .blocked {
   opacity: 0.3;
   -moz-transition-property: opacity;

@@ -2,9 +2,11 @@
 requirejs.config({
     baseUrl: 'app',
     paths: {
+        // Vendor
         'angular': '/packages/angular/angular.min',
         'angular-route': '/packages/angular-route/angular-route.min',
         'angularAMD': '/packages/angularAMD/angularAMD.min',
+        'underscore': '/packages/underscore/underscore-min',
 
         // App
         'app': '/app/app',
@@ -29,6 +31,8 @@ requirejs.config({
     shim: {
         'angularAMD': ['angular'],
         'angular-route': ['angular'],
+        'underscore': ['angular'],
+
         'app': [
             // Services
             'resourceFactory',

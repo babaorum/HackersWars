@@ -4,35 +4,52 @@ define(function () {
 
     var database = function ($scope, $interval, resourceFactory) {
 
-        var loop = false,
-            building = resourceFactory.getBuilding('datacenter');
+        var loop, key, building, fillBuilding;
 
+        loop = false;
+        key = 'datacenter';
+        building = resourceFactory.getBuilding(key);
 
+        fillBuilding = function () {
+            $scope.name = building.name;
+            $scope.img = building.img;
+            $scope.description = building.description;
+            $scope.level = building.level;
+            $scope.upgrades = building.upgrades;
 
-        $scope.name = building.name;
-        $scope.img = building.img;
-        $scope.description = building.description;
-        $scope.price = building.price;
-        $scope.level = building.level;
-        $scope.blocked = building.blocked;
-        $scope.upgrades = building.upgrades;
-
-        $scope.buy = function () {
-            if (resourceFactory.buyIfPossible($scope.price)) {
-                $scope.blocked = false;
-            }
+            $scope.upgradeMax = _.size(angular.copy($scope.upgrades));
         };
 
-        // Database bitcoin Loop
-        $scope.$watch('blocked', function () {
+        $scope.buy = function () {
+            $scope.upgrade();
+        };
 
-            if ($scope.blocked || loop) { return; }
+        $scope.upgrade = function () {
+
+            if (!resourceFactory.buyIfPossible($scope.upgrades[$scope.level + 1].price)) { return; }
+
+            resourceFactory.addBuildingLevel(key);
+        };
+
+        // init
+        fillBuilding();
+
+        // Database bitcoin Loop
+        $scope.$watch('level', function () {
+
+
+            if ($scope.level === 0 || loop) { return; }
 
             loop = true;
 
             $interval(function () {
-                resourceFactory.addBitcoin($scope.level);
-            }, 60 * 1000 - 59000);
+                resourceFactory.addBitcoin($scope.upgrades[$scope.level].bitcoinRatio);
+            }, 60 * 1000 - 59950);
+        });
+
+        // Building modification watch
+        $scope.$watchCollection(function () { return resourceFactory.getBuilding(key); }, function () {
+            fillBuilding();
         });
     };
 
