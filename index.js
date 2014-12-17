@@ -6,6 +6,7 @@ var expressSession = require('express-session');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth-offline').OAuth2Strategy;
 var UserRessource = require('./server/Ressources/UserRessource');
+var BuildingRessource = require('./server/Ressources/BuildingRessource');
 
 var root = path.resolve(__dirname, '.');
 
@@ -22,44 +23,47 @@ app.engine('html', require('ejs').renderFile);
 var routes = require('./server/routes');
 
 app.use(bodyParser.json({
-	extended: true
+    extended: true
 }));
 app.use(bodyParser.urlencoded({
-	extended: true
+    extended: true
 }));
 
 //coucou
 passport.serializeUser(function (user, done) {
-	done(null, user._id);
+    done(null, user._id);
 });
 passport.deserializeUser(function (id, done) {
-	UserRessource.Fetch(id, done);	
+    UserRessource.Fetch(id, done);
 });
 
 passport.use(new GoogleStrategy({
     clientID: "131420647360-0at81lq61r2qnn677cem90cbg2kdnver.apps.googleusercontent.com",
     clientSecret: "uiiXZ5NG2vDgctEP9d2VuUin",
     callbackURL: "http://localhost:8080/auth/google/callback"
-  },
-  function(token, tokenSecret, profile, done) {
-    data = profile._json;
-    blob = {
-      id_google: data.id,
-      email: data.email,
-      name: data.family_name,
-      firstname: data.given_name,
-      picture: data.picture
-    };
-    UserRessource.FetchByGoogleId(data.id, function (err, user) {
-      if (user != null) {
-        return done(err, user);
-      } else {
-        UserRessource.Deserialize(blob, function(err, userR) {
-          return userR.Save(done);
+    },
+    function(token, tokenSecret, profile, done) {
+        data = profile._json;
+        blob = {
+            id_google: data.id,
+            email: data.email,
+            name: data.family_name,
+            firstname: data.given_name,
+            picture: data.picture
+        };
+        UserRessource.FetchByGoogleId(data.id, function (err, user) {
+            if (user != null) {
+                return done(err, user);
+            } else {
+                UserRessource.Deserialize(blob, function(err, userR) {
+                    userR.Save(function(err, userR) {
+                        BuildingRessource.InitForUser(userR._id);
+                        done(err, userR);
+                    });
+                });
+            }
         });
-      }
-    });
-  }
+    }
 ));
 
 
@@ -67,7 +71,7 @@ passport.use(new GoogleStrategy({
 routes.mount(app);
 
 app.get('/', function(req,res){
-	if(!req.user) {
+    if(!req.user) {
     return res.status(200).render('index.html');
   } else {
     if(!req.user.team) {
@@ -85,12 +89,12 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/auth/google', passport.authenticate('google', { scope: [
-		'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
-    ]}), function(req, res){});
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'https://www.googleapis.com/auth/userinfo.email'
+]}), function(req, res){});
 app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/' }), function(req, res) {
-    res.redirect('/');
+    passport.authenticate('google', { failureRedirect: '/' }), function(req, res) {
+        res.redirect('/');
 });
 
 // DEBUG FRONT ROUTE

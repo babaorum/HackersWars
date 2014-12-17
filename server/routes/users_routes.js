@@ -1,4 +1,5 @@
 var UserRessource = require('./../Ressources/UserRessource');
+var BuildingRessource = require('./../Ressources/BuildingRessource');
 var _ = require('underscore');
 
 module.exports.mount = function(app) {
@@ -23,7 +24,16 @@ module.exports.mount = function(app) {
             return res.status(401).end();
         }
 
-        return res.status(200).send(req.user).end();
+        var user = req.user;
+        BuildingRessource.List(req.user._id, function(err, building) {
+            var to_return = [];
+            _.each(building, function(build) {
+                to_return.push(build.Serialize());
+            })
+
+            user.building = to_return;
+            return res.status(200).send(user).end();
+        });
     });
 
     app.get('/api/users', function (req, res) {
@@ -80,7 +90,7 @@ module.exports.mount = function(app) {
 
         UserRessource.Delete(id, function (err, response) {
             if (response === true) {
-                res.status(204).end().end();
+                res.status(204).end();
             }
         });
     });
