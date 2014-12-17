@@ -38,6 +38,12 @@ define(function () {
             resourceFactory.addBuildingLevel(key);
         };
 
+        $scope.buyUnit = function () {
+            if (!resourceFactory.buyIfPossible($scope.unitStat.price)) { return; }
+
+            resourceFactory.addUnit(key);
+        };
+
         // init
         fillBuilding();
 

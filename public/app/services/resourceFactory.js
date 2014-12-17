@@ -37,7 +37,51 @@ define(function () {
             return true;
         };
 
-        //@TODO: test buy building
+        res.addUnit = function (key) {
+            res.buildings[key].units += 1;
+
+            res.calculateStats();
+        };
+
+        res.addBuildingLevel = function (key) {
+            res.buildings[key].level += 1;
+            res.calculateStats();
+        };
+
+        res.calculateStats = function () {
+
+            var building, nbUnit, stat, level, ratio;
+
+            // Reset
+            res.power = 0;
+            res.attack = 0;
+            res.security = 0;
+
+            // Each building
+            for (building in res.buildings) {
+                if (res.buildings.hasOwnProperty(building)) {
+
+                    nbUnit = res.buildings[building].units;
+                    stat = res.buildings[building].unitStat;
+
+                    if (nbUnit < 0) { return; }
+
+                    level = res.buildings[building].level;
+                    ratio = !level ? 1 : res.buildings[building].upgrades[level].unitRatio;
+
+                    for (nbUnit; nbUnit > 0; nbUnit--) {
+
+                        console.log(ratio);
+
+                        res.power += Math.floor(stat.power * ratio);
+                        res.attack += Math.floor(stat.attack * ratio);
+                        res.security += Math.floor(stat.security * ratio);
+                    }
+                }
+
+            }
+        };
+
         // Init
         res.init = function () {
 
@@ -57,6 +101,9 @@ define(function () {
                 // Store each building
                 res.buildings[data.name] = building;
 
+                // Calculate Stats
+                res.calculateStats();
+
             }).error(function (data, status, headers, config) {
 
                 console.log(data, status, headers, config);
@@ -75,18 +122,18 @@ define(function () {
             building.level = 0;
             building.upgrades = {
                 1: {price: 10, bitcoinRatio: 1, unitRatio: 1},
-                2: {price: 100, bitcoinRatio: 2, unitRatio: 2},
-                3: {price: 250, bitcoinRatio: 3, unitRatio: 3},
-                4: {price: 450, bitcoinRatio: 4.5, unitRatio: 4.5},
-                5: {price: 700, bitcoinRatio: 6, unitRatio: 6},
-                6: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
+                2: {price: 100, bitcoinRatio: 2, unitRatio: 1.2},
+                3: {price: 250, bitcoinRatio: 3, unitRatio: 1.4},
+                4: {price: 450, bitcoinRatio: 4.5, unitRatio: 1.6},
+                5: {price: 700, bitcoinRatio: 6, unitRatio: 1.8},
+                6: {price: 1200, bitcoinRatio: 10, unitRatio: 2}
             };
             building.units = 0;
             building.unitStat = {
-                attack: 10,
-                security: 50,
-                power: 5,
-                price: 1000,
+                attack: 0,
+                security: 25,
+                power: 500,
+                price: 2000,
                 name: 'SysAdmin'
             };
 
@@ -101,18 +148,18 @@ define(function () {
             building.level = 0;
             building.upgrades = {
                 1: {price: 50, unitRatio: 1},
-                2: {price: 100, unitRatio: 2},
-                3: {price: 250, unitRatio: 3},
-                4: {price: 450, unitRatio: 4.5},
-                5: {price: 700, unitRatio: 6},
-                6: {price: 1200, unitRatio: 10}
+                2: {price: 100, unitRatio: 1.2},
+                3: {price: 250, unitRatio: 1.4},
+                4: {price: 450, unitRatio: 1.6},
+                5: {price: 700, unitRatio: 1.8},
+                6: {price: 1200, unitRatio: 2}
             };
             building.units = 0;
             building.unitStat = {
-                attack: 50,
+                attack: 10,
                 security: 0,
-                power: 2,
-                price: 500,
+                power: 10,
+                price: 300,
                 name: 'Zombie computer'
             };
 
@@ -127,22 +174,25 @@ define(function () {
             building.level = 0;
             building.upgrades = {
                 1: {price: 100, unitRatio: 1},
-                2: {price: 200, unitRatio: 2},
-                3: {price: 350, unitRatio: 3},
-                4: {price: 500, unitRatio: 4.5},
-                5: {price: 750, unitRatio: 6},
-                6: {price: 1200, unitRatio: 10}
+                2: {price: 200, unitRatio: 1.2},
+                3: {price: 350, unitRatio: 1.4},
+                4: {price: 500, unitRatio: 1.6},
+                5: {price: 750, unitRatio: 1.8},
+                6: {price: 1200, unitRatio: 2}
             };
             building.units = 0;
             building.unitStat = {
-                attack: 100,
-                security: 30,
-                power: 4,
+                attack: 25,
+                security: 0,
+                power: 0,
                 price: 2000,
                 name: 'Hacker'
             };
 
             res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
+
+            // Calculate Stats
+            res.calculateStats();
         };
 
         // init
@@ -171,9 +221,12 @@ define(function () {
             setSecurity: function (value) { return res.set('security', value); },
             addSecurity: function (value) { return res.set('security', res.security + value); },
 
-            // Get building
+            // Building
             getBuilding: function (key) { return res.get('buildings', key); },
-            addBuildingLevel: function (key) { res.buildings[key].level += 1; },
+            addBuildingLevel: res.addBuildingLevel,
+
+            // Units
+            addUnit: res.addUnit,
 
             // Methods
             buyIfPossible: res.buyIfPossible

@@ -20,12 +20,15 @@
             </span>
         </button>
 
-        <button class="button unit" ng-click="unit()" ng-disabled="level == 0">
-            Add one {{ unitName }}
-        </button>
-
         <button class="button end" ng-class="{max: level == upgradeMax}">
             Max Upgrade
+        </button>
+
+        <button class="button unit" ng-click="buyUnit()" ng-click="unit()" ng-disabled="level == 0">
+            Buy one {{ unitStat.name }}
+            <span class="no-wrap">
+                <img src="/assets/images/bitcoin-icon.png" class="bitcoin" alt=""/> {{ unitStat.price }}
+            </span>
         </button>
 
         <div class="clear"></div>
@@ -39,5 +42,5 @@
 </div>
 
 <div class="units">
-    test
+    Unit number: {{ units }}
 </div>
