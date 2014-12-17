@@ -85,6 +85,24 @@
         margin-top: 80px;
       }
 
+      .button.end {
+        display: none;
+      }
+
+      .max {
+
+        .button {
+
+          &.buy, &.upgrade {
+            display: none;
+          }
+
+          &.end {
+            display: block;
+          }
+        }
+      }
+
       .blocked {
 
         opacity: 0.3;
@@ -99,7 +117,6 @@
           &.upgrade {
             display: none;
           }
-
         }
 
         .units {

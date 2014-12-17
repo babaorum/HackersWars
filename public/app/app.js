@@ -1,10 +1,14 @@
-define(['angularAMD', 'angular-route'], function (angularAMD) {
+define(['angularAMD', 'angular-route', 'underscore'], function (angularAMD) {
 
     'use strict';
 
-    // Define app
-    var app = angular.module("hackerWars", []);
+    var app, _;
 
+    // Define app
+    app = angular.module("hackerWars", []);
+
+    // Define global libs
+    _ = require('underscore');
 
     /**
      * ================
@@ -13,13 +17,13 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      */
 
     // Resource
-    app.factory('ResourceFactory', require('resourceFactory'));
+    app.factory('ResourceFactory', ['$http', require('resourceFactory')]);
 
     // User
     app.factory('UserFactory', ['$http', require('userFactory')]);
 
     // Toast
-    app.factory('ToastFactory', require('toastFactory'));
+    app.factory('ToastFactory', ['$timeout', require('toastFactory')]);
 
 
     /**
@@ -29,10 +33,10 @@ define(['angularAMD', 'angular-route'], function (angularAMD) {
      */
 
     // Bank
-    app.controller('ResourceController', ['$scope', 'ResourceFactory', 'ToastFactory', require('resourceController')]);
+    app.controller('ResourceController', ['$scope', 'ResourceFactory', require('resourceController')]);
 
     // Databases
-    app.controller('DatabaseController', ['$scope', 'ResourceFactory', require('databaseController')]);
+    app.controller('DatabaseController', ['$scope', '$interval', 'ResourceFactory', 'ToastFactory', require('databaseController')]);
 
     // Computers
     app.controller('ComputerController', ['$scope', 'ResourceFactory', require('computerController')]);

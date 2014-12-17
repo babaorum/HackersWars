@@ -36,12 +36,13 @@ define(function () {
                 user.picture = data.picture;
                 user.team = data.team;
 
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
 
                 console.log(data, status, headers, config);
             });
         };
 
+        // init
         user.init();
 
         return {

@@ -4,19 +4,40 @@ define(function () {
 
     var computer = function ($scope, resourceFactory) {
 
-        $scope.name = "Personal computers";
-        $scope.img = "computer_clq";
-        $scope.description = "Unblock the zombie computer unit and increase your attack power.";
+        var key, building, fillBuilding;
 
-        $scope.price = 50;
-        $scope.level = 1;
-        $scope.blocked = true;
+        key = 'personalcomputers';
+        building = resourceFactory.getBuilding(key);
+
+        fillBuilding = function () {
+
+            $scope.name = building.name;
+            $scope.img = building.img;
+            $scope.description = building.description;
+            $scope.level = building.level;
+            $scope.upgrades = building.upgrades;
+
+            $scope.upgradeMax = _.size(angular.copy($scope.upgrades)) - 1;
+        };
 
         $scope.buy = function () {
-            if (resourceFactory.buyIfPossible($scope.price)) {
-                $scope.blocked = false;
-            }
+            $scope.upgrade();
         };
+
+        $scope.upgrade = function () {
+
+            if (!resourceFactory.buyIfPossible($scope.upgrades[$scope.level + 1].price)) { return; }
+
+            resourceFactory.addBuildingLevel(key);
+        };
+
+        // init
+        fillBuilding();
+
+        // Building modification watch
+        $scope.$watchCollection(function () { return resourceFactory.getBuilding(key); }, function () {
+            fillBuilding();
+        });
     };
 
     return computer;
