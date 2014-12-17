@@ -54,7 +54,7 @@
     opacity: 1;
 
     h3 {
-      font-size: 25px;
+      font-size: 22px;
       margin-bottom: 10px;
     }
 
@@ -68,25 +68,28 @@
       }
 
       .button {
-        float: left;
         margin-top: 20px;
-      }
+        font-size: 12px !important;
+        line-height: 16px;
+        display: block;
+        text-align: center;
+        float: none;
 
-      .button:last-child {
-        top: 140px;
-      }
+        &.buy {
+          display: none;
+        }
 
-      .button.buy {
-        display: none;
+        &.end {
+          display: none;
+        }
       }
 
       .explanations {
-        display: none;
-        margin-top: 80px;
+        margin-top: 20px;
       }
 
-      .button.end {
-        display: none;
+      .units {
+        margin-top: 20px;
       }
 
       .max {
@@ -117,14 +120,14 @@
           &.upgrade {
             display: none;
           }
+
+          &.unit {
+            display: none;
+          }
         }
 
         .units {
           display: none;
-        }
-
-        .explanations {
-          display: block;
         }
       }
 

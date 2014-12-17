@@ -1,28 +1,43 @@
 <h3>{{ name }}</h3>
 
-<img src="/assets/images/{{ img }}.png" class="image_clq grid-40 mobile-grid-40 no-padding" alt=""/>
+<div class="grid-100 grid-parent">
 
-<div class="actions grid-45 mobile-grid-45 prefix-5 suffix-10 mobile-prefix-5 no-padding" ng-class="{max: level == upgradeMax}">
+    <img src="/assets/images/{{ img }}.png" class="image_clq grid-35 mobile-grid-35 no-padding" alt=""/>
 
-    <button class="button buy" ng-click="buy()">
-        Buy
-        <img src="/assets/images/bitcoin-icon.png" class="bitcoin" alt=""/> {{ upgrades[level + 1].price }}
-    </button>
-    <button class="button upgrade" ng-click="upgrade()" ng-disabled="level == 0">
-        Upgrade [{{ level + 1 }}]
-        <img src="/assets/images/bitcoin-icon.png" class="bitcoin" alt=""/> {{ upgrades[level + 1].price }}
-    </button>
+    <div class="actions grid-50 mobile-grid-50 prefix-5 suffix-10 mobile-prefix-5 no-padding" ng-class="{max: level == upgradeMax}">
 
-    <button class="button end" ng-class="{max: level == upgradeMax}">
-        Max Upgrade
-    </button>
+        <button class="button buy" ng-click="buy()">
+            Buy
+            <span class="no-wrap">
+              <img src="/assets/images/bitcoin-icon.png" class="bitcoin" alt=""/> {{ upgrades[level + 1].price }}
+            </span>
+        </button>
 
+        <button class="button upgrade" ng-click="upgrade()" ng-disabled="level == 0">
+            Upgrade [{{ level + 1 }}]
+            <span class="no-wrap">
+                <img src="/assets/images/bitcoin-icon.png" class="bitcoin" alt=""/> {{ upgrades[level + 1].price }}
+            </span>
+        </button>
+
+        <button class="button unit" ng-click="unit()" ng-disabled="level == 0">
+            Add one {{ unitName }}
+        </button>
+
+        <button class="button end" ng-class="{max: level == upgradeMax}">
+            Max Upgrade
+        </button>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="grid-100 no-padding">
     <p class="explanations">
         {{ description }}
     </p>
-
-    <div class="clear"></div>
 </div>
 
 <div class="units">
+    test
 </div>

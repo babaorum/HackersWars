@@ -277,7 +277,7 @@ hr {
   opacity: 1;
 }
 #dashboard body #board h3 {
-  font-size: 25px;
+  font-size: 22px;
   margin-bottom: 10px;
 }
 #dashboard body #board .board-elem {
@@ -288,21 +288,24 @@ hr {
   background-color: #3aff2d;
 }
 #dashboard body #board .board-elem .button {
-  float: left;
   margin-top: 20px;
-}
-#dashboard body #board .board-elem .button:last-child {
-  top: 140px;
+  font-size: 12px !important;
+  line-height: 16px;
+  display: block;
+  text-align: center;
+  float: none;
 }
 #dashboard body #board .board-elem .button.buy {
   display: none;
 }
-#dashboard body #board .board-elem .explanations {
-  display: none;
-  margin-top: 80px;
-}
 #dashboard body #board .board-elem .button.end {
   display: none;
+}
+#dashboard body #board .board-elem .explanations {
+  margin-top: 20px;
+}
+#dashboard body #board .board-elem .units {
+  margin-top: 20px;
 }
 #dashboard body #board .board-elem .max .button.buy, #dashboard body #board .board-elem .max .button.upgrade {
   display: none;
@@ -327,11 +330,11 @@ hr {
 #dashboard body #board .board-elem .blocked .button.upgrade {
   display: none;
 }
-#dashboard body #board .board-elem .blocked .units {
+#dashboard body #board .board-elem .blocked .button.unit {
   display: none;
 }
-#dashboard body #board .board-elem .blocked .explanations {
-  display: block;
+#dashboard body #board .board-elem .blocked .units {
+  display: none;
 }
 #dashboard body #board .board-elem:hover .blocked {
   opacity: 1;

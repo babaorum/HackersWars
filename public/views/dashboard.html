@@ -70,15 +70,15 @@
 
 <section id="board" class="grid-container">
 
-    <div id="data_centers" class="board-elem grid-33 grid-parent" ng-controller="DatabaseController as board">
+    <div id="data_centers" class="board-elem grid-33" ng-controller="DatabaseController as board">
         <div ng-class="{blocked: level == 0}" ng-include="'/templates/board-elem.html'"></div>
     </div>
 
-    <div id="personal_computers" class="board-elem grid-33 grid-parent" ng-controller="ComputerController as board">
+    <div id="personal_computers" class="board-elem grid-33" ng-controller="ComputerController as board">
         <div ng-class="{blocked: level == 0}" ng-include="'/templates/board-elem.html'"></div>
     </div>
 
-    <div id="caves" class="board-elem grid-33 grid-parent blocked" ng-controller="CaveController as board">
+    <div id="caves" class="board-elem grid-33 blocked" ng-controller="CaveController as board">
         <div ng-class="{blocked: level == 0}" ng-include="'/templates/board-elem.html'"></div>
     </div>
 
