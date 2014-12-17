@@ -81,12 +81,13 @@ define(function () {
                 5: {price: 700, bitcoinRatio: 6, unitRatio: 6},
                 6: {price: 1200, bitcoinRatio: 10, unitRatio: 10}
             };
-            building.unitName = 'Admin Sys';
             building.units = 0;
             building.unitStat = {
                 attack: 10,
                 security: 50,
-                power: 5
+                power: 5,
+                price: 1000,
+                name: 'SysAdmin'
             };
 
             res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
@@ -106,12 +107,13 @@ define(function () {
                 5: {price: 700, unitRatio: 6},
                 6: {price: 1200, unitRatio: 10}
             };
-            building.unitName = 'Zombie computer';
             building.units = 0;
             building.unitStat = {
                 attack: 50,
                 security: 0,
-                power: 2
+                power: 2,
+                price: 500,
+                name: 'Zombie computer'
             };
 
             res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
@@ -131,12 +133,13 @@ define(function () {
                 5: {price: 750, unitRatio: 6},
                 6: {price: 1200, unitRatio: 10}
             };
-            building.unitName = 'Hacker';
             building.units = 0;
             building.unitStat = {
                 attack: 100,
                 security: 30,
-                power: 4
+                power: 4,
+                price: 2000,
+                name: 'Hacker'
             };
 
             res.buildings[building.name.toLowerCase().replace(' ', '')] = building;

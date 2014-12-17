@@ -11,13 +11,19 @@ define(function () {
 
         fillBuilding = function () {
 
+            // Building
             $scope.name = building.name;
             $scope.img = building.img;
             $scope.description = building.description;
             $scope.level = building.level;
             $scope.upgrades = building.upgrades;
 
-            $scope.upgradeMax = _.size(angular.copy($scope.upgrades)) - 1;
+            $scope.upgradeMax = _.size(angular.copy($scope.upgrades));
+
+            // Unit
+            $scope.unitName = building.unitName;
+            $scope.units = building.units;
+            $scope.unitStat = building.unitStat;
         };
 
         $scope.buy = function () {
