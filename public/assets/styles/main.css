@@ -193,6 +193,9 @@ body {
   background-color: #0c0c0c;
   color: #3aff2d;
 }
+body a {
+  color: #3aff2d;
+}
 
 hr {
   border: none;

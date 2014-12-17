@@ -11,6 +11,8 @@ define(function () {
         building = resourceFactory.getBuilding(key);
 
         fillBuilding = function () {
+
+            // Building
             $scope.name = building.name;
             $scope.img = building.img;
             $scope.description = building.description;
