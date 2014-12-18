@@ -1,26 +1,29 @@
 var units = {
     datacenter: {
-        unitName: 'adminsys',
         unitStats: {
-            attack: 10,
-            security: 50,
-            power: 5
+            name: 'SysAdmin',
+            attack: 0,
+            security: 25,
+            power: 500,
+            price: 2000
         }
     },
     personal_computer: {
-        unitName: 'zombie_computer',
         unitStats: {
-            attack: 50,
+            name: 'Zombie computer',
+            attack: 10,
             security: 0,
-            power: 2
+            power: 10,
+            price: 300
         }
     },
     cave: {
-        unitName: 'hackers',
         unitStats: {
-            attack: 100,
-            security: 30,
-            power: 4
+            name: 'Hacker',
+            attack: 25,
+            security: 0,
+            power: 0,
+            price: 2000
         }
     }
 };
