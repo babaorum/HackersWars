@@ -3,6 +3,7 @@ var driver_config = require('./../config/config.'+config.dbType);
 var $ = require(driver_config.driverName).Mongous;
 var db = driver_config.db.name;
 var _ = require('underscore');
+var ObjectID = require("mongous/bson/bson.js").ObjectID;
 
 function MongoConnector() {
 
@@ -10,18 +11,17 @@ function MongoConnector() {
 
 MongoConnector.CreateObjectId = function(ressource) {
 	var id = null;
-	var oid = require("mongous/bson/bson.js").ObjectID;
 	
 	if(ressource._id !== undefined) {
 		id = ressource._id;
 	}
 	
-	ressource._id = new oid(id);
+	ressource._id = new ObjectID(id);
 	return ressource;
 };
 
 MongoConnector.Select = function(table_name, fields, where, options, done) {
-	if(where._id !== undefined) {
+	if(where._id !== undefined && !(where._id instanceof ObjectID)) {
 		where = MongoConnector.CreateObjectId(where);
 	}
 
@@ -31,15 +31,13 @@ MongoConnector.Select = function(table_name, fields, where, options, done) {
 };
 
 MongoConnector.Save = function(table_name, ressource, done) {
-	var oid = require("mongous/bson/bson.js").ObjectID;
-
 	if(!ressource._id) {
 		ressource = MongoConnector.CreateObjectId(ressource);
 		$(db+'.'+table_name).save(ressource);
 		done(null, ressource);
 	}else{
 		MongoConnector.Select(table_name, "*", { _id: ressource._id }, {}, function(err, response){
-			if(!(ressource._id instanceof oid)) {
+			if(!(ressource._id instanceof ObjectID)) {
 				ressource = MongoConnector.CreateObjectId(ressource);
 			}
 			if(response == null) {

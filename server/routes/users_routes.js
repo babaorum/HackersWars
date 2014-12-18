@@ -25,7 +25,7 @@ module.exports.mount = function(app) {
         }
 
         var user = req.user;
-        BuildingRessource.List(req.user._id, function(err, building) {
+        BuildingRessource.List(user._id, function(err, building) {
             var to_return = [];
             _.each(building, function(build) {
                 to_return.push(build.Serialize());

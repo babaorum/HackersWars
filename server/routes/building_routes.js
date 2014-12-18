@@ -1,8 +1,32 @@
 var _ = require('underscore');
 var BuildingRessource = require('./../Ressources/BuildingRessource');
+var ObjectID = require('mongous/bson/bson.js').ObjectID;
 
 module.exports.mount = function(app) {
-    app.post('/api/building', function(req, res) {
+    app.post('/api/building/:id/upgrade', function(req, res) {
+        if(!req.user) {
+            return res.status(401).end();
+        }
+
+        var id_building = req.params.id;
+        BuildingRessource.Fetch(id_building, function(err, response) {
+            if(response instanceof BuildingRessource) {
+                if(response.id_user == req.user._id) {
+                    response.level += 1;
+                    response.Save(function(err, response){
+                        return res.status(201).send(response.Serialize());
+                    });
+                } else {
+                    return res.status(401).end();
+                }
+            } else {
+                return res.status(404).end();
+            }
+        });
+    });
+
+//API
+    /*app.post('/api/building', function(req, res) {
         if(!req.user) {
             return res.status(401).end();
         }
@@ -16,7 +40,7 @@ module.exports.mount = function(app) {
                 });
             }
         });
-    });
+    });*/
 
     app.get('/api/building', function(req, res) {
         if(!req.user) {
