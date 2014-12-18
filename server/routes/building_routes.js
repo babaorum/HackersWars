@@ -107,7 +107,7 @@ module.exports.mount = function(app) {
             buildingR = _.extend(buildingR, building);
 
             buildingR.Save(function(err, response) {
-                res.status(200).send(response);
+                res.status(200).send(response.Serialize());
             });
         });
     });
