@@ -5,7 +5,7 @@ define(['angularAMD', 'angular-route', 'underscore'], function (angularAMD) {
     var app, _;
 
     // Define app
-    app = angular.module("hackerWars", []);
+    app = angular.module('hackerWars', []);
 
     // Define global libs
     _ = require('underscore');
@@ -17,10 +17,10 @@ define(['angularAMD', 'angular-route', 'underscore'], function (angularAMD) {
      */
 
     // Resource
-    app.factory('ResourceFactory', ['$http', require('resourceFactory')]);
+    app.factory('ResourceFactory', ['userData', require('resourceFactory')]);
 
     // User
-    app.factory('UserFactory', ['$http', require('userFactory')]);
+    app.factory('UserFactory', ['userData', require('userFactory')]);
 
     // Toast
     app.factory('ToastFactory', ['$timeout', require('toastFactory')]);
@@ -64,5 +64,35 @@ define(['angularAMD', 'angular-route', 'underscore'], function (angularAMD) {
     app.filter('reverse', require('reverseFilter'));
 
 
-    return angularAMD.bootstrap(app);
+    /**
+     * ================
+     * ====== Bootstrap
+     * ================
+     */
+    (function () {
+
+        // Is dashboard ?
+        if (!document.getElementById('dashboard')) {
+
+            // Bootstrap AngularJs
+            return angularAMD.bootstrap(app);
+        }
+
+        var injector, $http;
+
+        injector = angular.injector(['ng']);
+        $http = injector.get('$http');
+
+        $http.get('/api/users/infos').success(function (data) {
+
+            // Store user info to app constant
+            app.constant('userData', data);
+
+            // Bootstrap AngularJs
+            angularAMD.bootstrap(app);
+
+        }).error(function (data, status, headers, config) {
+            console.log(data, status, headers, config);
+        });
+    }());
 });

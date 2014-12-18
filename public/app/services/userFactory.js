@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var factory = function ($http) {
+    var factory = function (userData) {
 
         var user = {};
 
@@ -27,19 +27,12 @@ define(function () {
         // Init
         user.init = function () {
 
-            $http.get('/api/users/infos').success(function (data) {
-
-                user.id = data['_id'];
-                user.name = data.name;
-                user.firstname = data.firstname;
-                user.email = data.email;
-                user.picture = data.picture;
-                user.team = data.team;
-
-            }).error(function (data, status, headers, config) {
-
-                console.log(data, status, headers, config);
-            });
+            user.id = userData['_id'];
+            user.name = userData.name;
+            user.firstname = userData.firstname;
+            user.email = userData.email;
+            user.picture = userData.picture;
+            user.team = userData.team;
         };
 
         // init

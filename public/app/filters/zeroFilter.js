@@ -5,6 +5,8 @@ define(function () {
     var zero = function () {
         return function (input, max) {
 
+            if (input === 'undefined') { return ''; }
+
             input = input.toString();
 
             while (input.length < max) { input = "0" + input; }

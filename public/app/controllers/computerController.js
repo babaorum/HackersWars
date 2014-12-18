@@ -32,13 +32,17 @@ define(function () {
 
         $scope.upgrade = function () {
 
-            if (!resourceFactory.buyIfPossible($scope.upgrades[$scope.level + 1].price)) { return; }
+            if (!resourceFactory.buyIfPossible($scope.upgrades[$scope.level + 1].price)) {
+                return;
+            }
 
             resourceFactory.addBuildingLevel(key);
         };
 
         $scope.buyUnit = function () {
-            if (!resourceFactory.buyIfPossible($scope.unitStat.price)) { return; }
+            if (!resourceFactory.buyIfPossible($scope.unitStat.price)) {
+                return;
+            }
 
             resourceFactory.addUnit(key);
         };
@@ -47,7 +51,9 @@ define(function () {
         fillBuilding();
 
         // Building modification watch
-        $scope.$watchCollection(function () { return resourceFactory.getBuilding(key); }, function () {
+        $scope.$watchCollection(function () {
+            return resourceFactory.getBuilding(key);
+        }, function () {
             fillBuilding();
         });
     };

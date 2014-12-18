@@ -2,9 +2,11 @@ define(function () {
 
     'use strict';
 
-    var factory = function ($http) {
+    var factory = function (userData) {
 
-        var res = {};
+        var res;
+
+        res = {};
 
         // Data
         res.bitcoin = 10;
@@ -18,7 +20,15 @@ define(function () {
 
             if (!key) { return res[data]; }
 
-            return res[data][key];
+            var result = {};
+
+            if (data === "buildings") {
+                result = {
+                    blocked: true
+                };
+            }
+
+            return res[data][key] || result;
         };
 
         // Setter
@@ -71,8 +81,6 @@ define(function () {
 
                     for (nbUnit; nbUnit > 0; nbUnit--) {
 
-                        console.log(ratio);
-
                         res.power += Math.floor(stat.power * ratio);
                         res.attack += Math.floor(stat.attack * ratio);
                         res.security += Math.floor(stat.security * ratio);
@@ -85,119 +93,38 @@ define(function () {
         // Init
         res.init = function () {
 
-            // Get buildings list
-            $http.get('/api/buildings').success(function (data) {
 
-                var building = {};
+            var building, buildingNb, dataBuilding;
 
-                building.name = data.name;
-                building.img = data.img;
-                building.description = data.description;
-                building.blocked = data.blocked;
-                building.price = data.price;
-                building.level = data.level;
-                building.upgrades = data.upgrades;
+            buildingNb = userData.building.length - 1;
+
+            for (buildingNb; buildingNb >= 0; buildingNb--) {
+
+                dataBuilding = userData.building[buildingNb];
+                building = {};
+
+                building.name = dataBuilding.name;
+                building.img = dataBuilding.img;
+                building.description = dataBuilding.description;
+                building.level = dataBuilding.level;
+                building.upgrades = dataBuilding.upgrades;
+                building.units = dataBuilding.units;
+                building.unitStat = dataBuilding.unitStats;
 
                 // Store each building
-                res.buildings[data.name] = building;
-
-                // Calculate Stats
-                res.calculateStats();
-
-            }).error(function (data, status, headers, config) {
-
-                console.log(data, status, headers, config);
-            });
-        };
-
-        //@FIX: in the wait of the API
-        res.initFake = function () {
-
-            // Data Center
-            var building = {};
-
-            building.name = 'Data center';
-            building.img = 'server_clq';
-            building.description = 'Give you one Bitcoin by hour and unblock the system administrator unit to increase your security';
-            building.level = 0;
-            building.upgrades = {
-                1: {price: 10, bitcoinRatio: 1, unitRatio: 1},
-                2: {price: 100, bitcoinRatio: 2, unitRatio: 1.2},
-                3: {price: 250, bitcoinRatio: 3, unitRatio: 1.4},
-                4: {price: 450, bitcoinRatio: 4.5, unitRatio: 1.6},
-                5: {price: 700, bitcoinRatio: 6, unitRatio: 1.8},
-                6: {price: 1200, bitcoinRatio: 10, unitRatio: 2}
-            };
-            building.units = 0;
-            building.unitStat = {
-                attack: 0,
-                security: 25,
-                power: 500,
-                price: 2000,
-                name: 'SysAdmin'
-            };
-
-            res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
-
-            // Personal computers
-            building = {};
-
-            building.name = 'Personal computers';
-            building.img = 'computer_clq';
-            building.description = 'Unblock the zombie computer unit and increase your attack score.';
-            building.level = 0;
-            building.upgrades = {
-                1: {price: 50, unitRatio: 1},
-                2: {price: 100, unitRatio: 1.2},
-                3: {price: 250, unitRatio: 1.4},
-                4: {price: 450, unitRatio: 1.6},
-                5: {price: 700, unitRatio: 1.8},
-                6: {price: 1200, unitRatio: 2}
-            };
-            building.units = 0;
-            building.unitStat = {
-                attack: 10,
-                security: 0,
-                power: 10,
-                price: 300,
-                name: 'Zombie computer'
-            };
-
-            res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
-
-            // Caves
-            building = {};
-
-            building.name = 'Caves';
-            building.img = 'console_clq';
-            building.description = 'Unblock the hacker unit to increase your attack, power and security score';
-            building.level = 0;
-            building.upgrades = {
-                1: {price: 100, unitRatio: 1},
-                2: {price: 200, unitRatio: 1.2},
-                3: {price: 350, unitRatio: 1.4},
-                4: {price: 500, unitRatio: 1.6},
-                5: {price: 750, unitRatio: 1.8},
-                6: {price: 1200, unitRatio: 2}
-            };
-            building.units = 0;
-            building.unitStat = {
-                attack: 25,
-                security: 0,
-                power: 0,
-                price: 2000,
-                name: 'Hacker'
-            };
-
-            res.buildings[building.name.toLowerCase().replace(' ', '')] = building;
+                res.buildings[dataBuilding.name.toLowerCase().replace(' ', '')] = building;
+            }
 
             // Calculate Stats
             res.calculateStats();
+
+            console.log(res.buildings);
         };
 
         // init
-        res.initFake();
+        res.init();
 
+        // Define Factory API
         return {
             //Data
 

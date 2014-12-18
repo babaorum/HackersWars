@@ -22,8 +22,6 @@ define(function () {
             $scope.upgradeMax = _.size(angular.copy($scope.upgrades));
 
             // Unit
-            $scope.unitName = building.unitName;
-            $scope.units = building.units;
             $scope.unitStat = building.unitStat;
         };
 
@@ -51,7 +49,7 @@ define(function () {
         $scope.$watch('level', function () {
 
 
-            if ($scope.level === 0 || loop) { return; }
+            if ($scope.level === 0 || loop || !$scope.upgrades) { return; }
 
             loop = true;
 
