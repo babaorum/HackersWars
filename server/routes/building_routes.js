@@ -3,6 +3,7 @@ var BuildingRessource = require('./../Ressources/BuildingRessource');
 var ObjectID = require('mongous/bson/bson.js').ObjectID;
 
 module.exports.mount = function(app) {
+    
     app.post('/api/building/:id/upgrade', function(req, res) {
         if(!req.user) {
             return res.status(401).end();
@@ -13,6 +14,28 @@ module.exports.mount = function(app) {
             if(response instanceof BuildingRessource) {
                 if(response.id_user == req.user._id) {
                     response.level += 1;
+                    response.Save(function(err, response){
+                        return res.status(201).send(response.Serialize());
+                    });
+                } else {
+                    return res.status(401).end();
+                }
+            } else {
+                return res.status(404).end();
+            }
+        });
+    });
+
+    app.post('/api/building/:id/units', function(req, res) {
+        if(!req.user) {
+            return res.status(401).end();
+        }
+
+        var id_building = req.params.id;
+        BuildingRessource.Fetch(id_building, function(err, response) {
+            if(response instanceof BuildingRessource) {
+                if(response.id_user == req.user._id) {
+                    response.units += 1;
                     response.Save(function(err, response){
                         return res.status(201).send(response.Serialize());
                     });
