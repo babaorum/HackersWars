@@ -2,7 +2,7 @@ var config = {
 	dbType: "mongo",
 	path: {
 		routes: "./server/routes",
-		ressource: "./server/Ressources",
+		resource: "./server/Resources",
 		connectors: "./server/Connectors",
 		processors: "./server/Processors",
 		bus: "./bus"

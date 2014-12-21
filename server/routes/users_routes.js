@@ -1,5 +1,5 @@
-var UserRessource = require('./../Ressources/UserRessource');
-var BuildingRessource = require('./../Ressources/BuildingRessource');
+var UserResource = require('./../Resources/UserResource');
+var BuildingResource = require('./../Resources/BuildingResource');
 var _ = require('underscore');
 
 module.exports.mount = function(app) {
@@ -11,7 +11,7 @@ module.exports.mount = function(app) {
         var user = req.user;
         user.team = req.body.team;
 
-        UserRessource.Deserialize(user, function(err, userR) {
+        UserResource.Deserialize(user, function(err, userR) {
             userR.Save(function(err, user) {
                 res.redirect('/');
             });
@@ -28,7 +28,7 @@ module.exports.mount = function(app) {
             user.bitcoins = req.body.bitcoins;
         }
 
-        UserRessource.Deserialize(user, function(err, userR) {
+        UserResource.Deserialize(user, function(err, userR) {
             userR.Save(function(err, user) {
                 res.status(201).send(user);
             });
@@ -42,7 +42,7 @@ module.exports.mount = function(app) {
         }
 
         var user = req.user;
-        BuildingRessource.List(user._id, function(err, building) {
+        BuildingResource.List(user._id, function(err, building) {
             var to_return = [];
             _.each(building, function(build) {
                 to_return.push(build.Serialize());
@@ -55,7 +55,7 @@ module.exports.mount = function(app) {
 
     app.get('/api/users', function (req, res) {
 
-        UserRessource.List(function (err, response) {
+        UserResource.List(function (err, response) {
             //serialize users
             var to_return = [];
             _(response).each(function (user) {
@@ -68,8 +68,8 @@ module.exports.mount = function(app) {
     app.get('/api/users/:id', function (req, res) {
         var id = req.params.id;
 
-        UserRessource.Fetch(id, function(err, response) {
-            if (response instanceof UserRessource) {
+        UserResource.Fetch(id, function(err, response) {
+            if (response instanceof UserResource) {
                 response = response.Serialize();
             }
             res.status(200).send(response).end();
@@ -79,7 +79,7 @@ module.exports.mount = function(app) {
     app.post('/api/users', function (req, res) {
         var user = req.body.users;
 
-        UserRessource.Deserialize(user, function (err, userR) {
+        UserResource.Deserialize(user, function (err, userR) {
             if (err === null) {
                 userR.Save(function (err, response) {
                     res.status(201).send(response).end();
@@ -93,7 +93,7 @@ module.exports.mount = function(app) {
         var id = req.params.id;
         var user = req.body.users;
 
-        UserRessource.Fetch(id, function (err, userR) {
+        UserResource.Fetch(id, function (err, userR) {
             userR = _.extend(userR, user);
 
             userR.Save(function (err, response) {
@@ -105,7 +105,7 @@ module.exports.mount = function(app) {
     app.delete('/api/users/:id', function (req,res) {
         var id = req.params.id;
 
-        UserRessource.Delete(id, function (err, response) {
+        UserResource.Delete(id, function (err, response) {
             if (response === true) {
                 res.status(204).end();
             }

@@ -11,8 +11,8 @@ Table.prototype.Select = function(fields, where, options, done) {
 	connector.Select(this.name, fields, where, options, done);
 };
 
-Table.prototype.Save = function(ressource, done) {
-	connector.Save(this.name, ressource, done);
+Table.prototype.Save = function(resource, done) {
+	connector.Save(this.name, resource, done);
 };
 
 Table.prototype.Insert = function(blob, done) {

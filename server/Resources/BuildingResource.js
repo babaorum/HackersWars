@@ -5,7 +5,7 @@ var buildingConfig = require('./../config/config.building');
 var unitsConfig = require('./../config/config.units');
 var ObjectID = require('mongous/bson/bson.js').ObjectID;
 
-function BuildingRessource(blob){
+function BuildingResource(blob){
     this._id = blob._id;
     this.id_user = blob.id_user;
     this.type = blob.type;
@@ -13,7 +13,7 @@ function BuildingRessource(blob){
     this.units = blob.units;
 };
 
-BuildingRessource.CreateObjectId = function(id) {
+BuildingResource.CreateObjectId = function(id) {
     if(id == undefined) {
         id = null;
     }
@@ -22,11 +22,11 @@ BuildingRessource.CreateObjectId = function(id) {
     return id;
 };
 
-BuildingRessource.InitForUser = function(id_user, done) {
+BuildingResource.InitForUser = function(id_user, done) {
     var buildingTypes = _.keys(buildingConfig);
 
     _.each(buildingTypes, function(type) {
-        BuildingRessource.Deserialize({
+        BuildingResource.Deserialize({
             "id_user": id_user,
             type: type,
             level: 0,
@@ -37,13 +37,13 @@ BuildingRessource.InitForUser = function(id_user, done) {
     });
 };
 
-BuildingRessource.Fetch = function(id, done) {
+BuildingResource.Fetch = function(id, done) {
     buildingTable.Select('*', {_id: id}, {}, function(err, response){
         var result = null;
 
         if(response.length > 0) {
             _(response).each(function(building) {
-                result = new BuildingRessource(building);
+                result = new BuildingResource(building);
             });
         }
         
@@ -51,47 +51,47 @@ BuildingRessource.Fetch = function(id, done) {
     });
 };
 
-BuildingRessource.List = function(id_user, done) {
+BuildingResource.List = function(id_user, done) {
     if(!(id_user instanceof ObjectID)) {
-        id_user = BuildingRessource.CreateObjectId(id_user);
+        id_user = BuildingResource.CreateObjectId(id_user);
     }
 
     buildingTable.Select('*', {id_user: id_user}, {}, function(err, response){
         var result = [];
 
         _(response).each(function(building) {
-            result.push(new BuildingRessource(building));
+            result.push(new BuildingResource(building));
         });
         
         done(err, result);
     });
 };
 
-BuildingRessource.Delete = function(id, done) {
+BuildingResource.Delete = function(id, done) {
     buildingTable.Delete(id, function(err, response){
         
         done(err, response);
     });
 };
 
-BuildingRessource.Deserialize = function(blob, done) {
+BuildingResource.Deserialize = function(blob, done) {
     var err = true;
     
-    var buildingR = new BuildingRessource(blob);
+    var buildingR = new BuildingResource(blob);
     
-    if(buildingR instanceof BuildingRessource) {
+    if(buildingR instanceof BuildingResource) {
         err = null;
     }
     done(err, buildingR);
 };
 
-BuildingRessource.prototype.Save = function(done) {
+BuildingResource.prototype.Save = function(done) {
     buildingTable.Save(this, function(err, response){
         done(err, response);
     });
 };
 
-BuildingRessource.prototype.Serialize = function() {
+BuildingResource.prototype.Serialize = function() {
     var to_return = {
         _id: this._id,
         id_user: this.id_user,
@@ -107,4 +107,4 @@ BuildingRessource.prototype.Serialize = function() {
     return to_return;
 };
 
-module.exports = BuildingRessource;
+module.exports = BuildingResource;

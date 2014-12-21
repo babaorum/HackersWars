@@ -5,8 +5,8 @@ var path = require('path');
 var expressSession = require('express-session');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth-offline').OAuth2Strategy;
-var UserRessource = require('./server/Ressources/UserRessource');
-var BuildingRessource = require('./server/Ressources/BuildingRessource');
+var UserResource = require('./server/Resources/UserResource');
+var BuildingResource = require('./server/Resources/BuildingResource');
 
 var root = path.resolve(__dirname, '.');
 
@@ -19,6 +19,21 @@ app.use(express.static(path.resolve(root, 'bower_components')));
 app.set('views', path.resolve(root, 'public/views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
+
+//socket.io
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+io.on('connection', function(socket) {
+    console.log('user connect');
+    socket.on('bitcoinsUpdate', function(bitcoins) {
+
+    });
+    socket.on('disconnect', function() {
+        console.log('user disconnected');
+    })
+});
+
 
 var routes = require('./server/routes');
 
@@ -33,7 +48,7 @@ passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
 passport.deserializeUser(function (id, done) {
-    UserRessource.Fetch(id, done);
+    UserResource.Fetch(id, done);
 });
 
 passport.use(new GoogleStrategy({
@@ -51,13 +66,13 @@ passport.use(new GoogleStrategy({
             picture: data.picture,
             bitcoins: 0
         };
-        UserRessource.FetchByGoogleId(data.id, function (err, user) {
+        UserResource.FetchByGoogleId(data.id, function (err, user) {
             if (user != null) {
                 return done(err, user);
             } else {
-                UserRessource.Deserialize(blob, function(err, userR) {
+                UserResource.Deserialize(blob, function(err, userR) {
                     userR.Save(function(err, userR) {
-                        BuildingRessource.InitForUser(userR._id);
+                        BuildingResource.InitForUser(userR._id);
                         done(err, userR);
                     });
                 });

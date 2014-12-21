@@ -9,15 +9,15 @@ function MongoConnector() {
 
 };
 
-MongoConnector.CreateObjectId = function(ressource) {
+MongoConnector.CreateObjectId = function(resource) {
 	var id = null;
 	
-	if(ressource._id !== undefined) {
-		id = ressource._id;
+	if(resource._id !== undefined) {
+		id = resource._id;
 	}
 	
-	ressource._id = new ObjectID(id);
-	return ressource;
+	resource._id = new ObjectID(id);
+	return resource;
 };
 
 MongoConnector.Select = function(table_name, fields, where, options, done) {
@@ -30,33 +30,33 @@ MongoConnector.Select = function(table_name, fields, where, options, done) {
 	});
 };
 
-MongoConnector.Save = function(table_name, ressource, done) {
-	if(!ressource._id) {
-		ressource = MongoConnector.CreateObjectId(ressource);
-		$(db+'.'+table_name).save(ressource);
-		done(null, ressource);
+MongoConnector.Save = function(table_name, resource, done) {
+	if(!resource._id) {
+		resource = MongoConnector.CreateObjectId(resource);
+		$(db+'.'+table_name).save(resource);
+		done(null, resource);
 	}else{
-		MongoConnector.Select(table_name, "*", { _id: ressource._id }, {}, function(err, response){
-			if(!(ressource._id instanceof ObjectID)) {
-				ressource = MongoConnector.CreateObjectId(ressource);
+		MongoConnector.Select(table_name, "*", { _id: resource._id }, {}, function(err, response){
+			if(!(resource._id instanceof ObjectID)) {
+				resource = MongoConnector.CreateObjectId(resource);
 			}
 			if(response == null) {
-				$(db+'.'+table_name).save(ressource);
-				done(null, ressource);
+				$(db+'.'+table_name).save(resource);
+				done(null, resource);
 			} else {
-				MongoConnector.Update(table_name, ressource, {_id: ressource._id}, done);
+				MongoConnector.Update(table_name, resource, {_id: resource._id}, done);
 			}
 		});
 	}
 };
 
-MongoConnector.Insert = function(table_name, ressource, done) {
-	$(db+'.'+table_name).insert(ressource);
+MongoConnector.Insert = function(table_name, resource, done) {
+	$(db+'.'+table_name).insert(resource);
 };
 
-MongoConnector.Update = function(table_name, ressource, where, done) {
-	var response = $(db+'.'+table_name).update(where, ressource);
-	done(response, ressource);
+MongoConnector.Update = function(table_name, resource, where, done) {
+	var response = $(db+'.'+table_name).update(where, resource);
+	done(response, resource);
 };
 
 MongoConnector.Delete = function(table_name, id, done) {

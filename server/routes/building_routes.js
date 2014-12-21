@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var BuildingRessource = require('./../Ressources/BuildingRessource');
+var BuildingResource = require('./../Resources/BuildingResource');
 var ObjectID = require('mongous/bson/bson.js').ObjectID;
 
 module.exports.mount = function(app) {
@@ -10,8 +10,8 @@ module.exports.mount = function(app) {
         }
 
         var id_building = req.params.id;
-        BuildingRessource.Fetch(id_building, function(err, response) {
-            if(response instanceof BuildingRessource) {
+        BuildingResource.Fetch(id_building, function(err, response) {
+            if(response instanceof BuildingResource) {
                 if(response.id_user == req.user._id) {
                     response.level += 1;
                     response.Save(function(err, response){
@@ -32,8 +32,8 @@ module.exports.mount = function(app) {
         }
 
         var id_building = req.params.id;
-        BuildingRessource.Fetch(id_building, function(err, response) {
-            if(response instanceof BuildingRessource) {
+        BuildingResource.Fetch(id_building, function(err, response) {
+            if(response instanceof BuildingResource) {
                 if(response.id_user == req.user._id) {
                     response.units += 1;
                     response.Save(function(err, response){
@@ -56,7 +56,7 @@ module.exports.mount = function(app) {
 
         var building = req.body.building;
 
-        BuildingRessource.Deserialize(building, function(err, buildingR) {
+        BuildingResource.Deserialize(building, function(err, buildingR) {
             if(err === null) {
                 buildingR.Save(function(err, response){
                     res.status(201).send(response);
@@ -70,7 +70,7 @@ module.exports.mount = function(app) {
             return res.status(401).end();
         }
 
-        BuildingRessource.List(req.user._id, function(err, response){
+        BuildingResource.List(req.user._id, function(err, response){
 
             var to_return = [];
             _(response).each(function(user){
@@ -87,8 +87,8 @@ module.exports.mount = function(app) {
 
         var id = req.params.id;
 
-        BuildingRessource.Fetch(id, function(err, response){
-            if(response instanceof BuildingRessource){
+        BuildingResource.Fetch(id, function(err, response){
+            if(response instanceof BuildingResource){
                 response = response.Serialize();
             }
             res.status(200).send(response);
@@ -103,7 +103,7 @@ module.exports.mount = function(app) {
         var id = req.params.id;
         var building = req.body.building;
 
-        BuildingRessource.Fetch(id, function(err, buildingR) {
+        BuildingResource.Fetch(id, function(err, buildingR) {
             buildingR = _.extend(buildingR, building);
 
             buildingR.Save(function(err, response) {
