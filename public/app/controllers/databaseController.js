@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var database = function ($scope, $interval, resourceFactory) {
+    var database = function ($scope, $interval, resourceFactory, toastFactory) {
 
         var loop, key, building, fillBuilding;
 

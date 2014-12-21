@@ -32,8 +32,8 @@ define(['angularAMD', 'angular-route', 'underscore'], function (angularAMD) {
      * ================
      */
 
-    // Bank
-    app.controller('ResourceController', ['$scope', 'ResourceFactory', require('resourceController')]);
+    // Resource
+    app.controller('ResourceController', ['$scope', '$http', 'ResourceFactory', require('resourceController')]);
 
     // Databases
     app.controller('DatabaseController', ['$scope', '$interval', 'ResourceFactory', 'ToastFactory', require('databaseController')]);

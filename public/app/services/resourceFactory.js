@@ -9,7 +9,7 @@ define(function () {
         res = {};
 
         // Data
-        res.bitcoin = 10;
+        res.bitcoin = 0;
         res.power = 0;
         res.attack = 0;
         res.security = 0;
@@ -104,6 +104,9 @@ define(function () {
             var building, buildingNb, dataBuilding;
 
             buildingNb = userData.building.length - 1;
+
+            // Bitcoins
+            res.bitcoin = userData.bitcoins || 10;
 
             for (buildingNb; buildingNb >= 0; buildingNb--) {
 
