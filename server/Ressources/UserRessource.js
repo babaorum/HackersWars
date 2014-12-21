@@ -11,6 +11,7 @@ function UserRessource(blob){
     this.email = blob.email;
     this.picture = blob.picture;
     this.team = blob.team;
+    this.bitcoins = blob.bitcoins;
 };
 
 UserRessource.Fetch = function(id, done) {
@@ -110,7 +111,8 @@ UserRessource.prototype.Serialize = function() {
         firstname: this.firstname,
         email: this.email,
         picture: this.picture,
-        team: this.team
+        team: this.team,
+        bitcoins: this.bitcoins
     };
 };
 

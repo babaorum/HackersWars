@@ -11,6 +11,7 @@ Post request data are explained in the post parameters section of this readme.
 | HTTP verb | Route                             | Explanation                                    | Logged |
 |:----------|:----------------------------------|:-----------------------------------------------|:------:|
 | POST      | /users/team                       | Post the team of the logged user               | Yes    |
+| POST      | /users/bitcoins                   | Post the bitcoins amount of the logged user    | Yes    |
 | GET       | /api/users/login/google           | Log a user with is google account              | No     |
 | GET       | /api/users/logout                 | Logout a user                                  | Yes    |
 | GET       | /api/users/infos                  | Get all the info for the logged user           | Yes    |

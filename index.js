@@ -29,7 +29,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-//coucou
 passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
@@ -49,7 +48,8 @@ passport.use(new GoogleStrategy({
             email: data.email,
             name: data.family_name,
             firstname: data.given_name,
-            picture: data.picture
+            picture: data.picture,
+            bitcoins: 0
         };
         UserRessource.FetchByGoogleId(data.id, function (err, user) {
             if (user != null) {

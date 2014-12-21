@@ -18,6 +18,23 @@ module.exports.mount = function(app) {
         });
     });
 
+    app.post('/users/bitcoins', function(req, res) {
+        if(!req.user) {
+            return res.redirect('/');
+        }
+        var user = req.user;
+
+        if(req.body.bitcoins != undefined) {
+            user.bitcoins = req.body.bitcoins;
+        }
+
+        UserRessource.Deserialize(user, function(err, userR) {
+            userR.Save(function(err, user) {
+                res.status(201).send(user);
+            });
+        });
+    });
+
 //API
     app.get('/api/users/infos', function(req, res) {
         if (!req.user) {
