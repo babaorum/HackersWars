@@ -27,7 +27,7 @@ define(function () {
         // Init
         user.init = function () {
 
-            user.id = userData['_id'];
+            user.id = userData._id;
             user.name = userData.name;
             user.firstname = userData.firstname;
             user.email = userData.email;

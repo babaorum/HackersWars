@@ -2,7 +2,7 @@ define(function () {
 
     'use strict';
 
-    var factory = function (userData) {
+    var factory = function ($http, userData) {
 
         var res;
 
@@ -47,15 +47,22 @@ define(function () {
             return true;
         };
 
-        res.addUnit = function (key) {
-            res.buildings[key].units += 1;
+        res.addUnit = function (id, key) {
 
-            res.calculateStats();
+            $http.post('/api/building/' + id + '/units', {}).success(function () {
+
+                res.buildings[key].units += 1;
+                res.calculateStats();
+            });
         };
 
-        res.addBuildingLevel = function (key) {
-            res.buildings[key].level += 1;
-            res.calculateStats();
+        res.addBuildingLevel = function (id, key) {
+
+            $http.post('/api/building/' + id + '/upgrade', {}).success(function () {
+
+                res.buildings[key].level += 1;
+                res.calculateStats();
+            });
         };
 
         res.calculateStats = function () {
@@ -103,6 +110,7 @@ define(function () {
                 dataBuilding = userData.building[buildingNb];
                 building = {};
 
+                building._id = dataBuilding._id;
                 building.name = dataBuilding.name;
                 building.img = dataBuilding.img;
                 building.description = dataBuilding.description;
@@ -117,8 +125,6 @@ define(function () {
 
             // Calculate Stats
             res.calculateStats();
-
-            console.log(res.buildings);
         };
 
         // init
